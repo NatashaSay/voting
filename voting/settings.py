@@ -40,9 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'votingsystem',
+
     'blockchain',
     'authentication',
+
+    'votedata',
+
+    'votingmain',
     'crispy_forms',
 ]
 
@@ -84,7 +90,7 @@ WSGI_APPLICATION = 'voting.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'voteDB',
+        'NAME': 'votedb',
         'USER': 'postgres',
         'PASSWORD': 'dwerty88',
         'HOST': '127.0.0.1',
@@ -135,7 +141,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGOUT_REDIRECT_URL = "/login/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

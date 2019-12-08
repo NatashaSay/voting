@@ -24,7 +24,8 @@ def login(request):
         user = auth.authenticate(username = username, password = password)
         if user is not None:
             auth.login(request, user)
-            return render(request, 'home.html')
+            #return render(request, 'home/')
+            return redirect('home')
         else:
             args['login_error'] = 'No matches'
             return redirect('/')
@@ -49,3 +50,7 @@ def signup(request):
     #else:
         #args['form']=newuser_form
     return render_to_response('signup.html', args)
+
+
+def needlogin(request):
+    return redirect('/')

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -18,7 +18,17 @@
     <![endif]-->
   </head>
   <body>
-    Hello user
+    Hello user its main<br>
+    <button type="button" class="btn btn-default" name="button"><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></button>
+    <br><br><br>
+    <button type="button" class="btn btn-default"><a href="/home/">Dashboard</a></button>
+    <button type="button" class="btn btn-default">Create voting</button>
+    <button type="button" class="btn btn-default">My polls</button>
+    <button type="button" class="btn btn-default">Results</button>
+    <button type="button" class="btn btn-default"> <a href="/profile/">My Profile</a></button>
+    <br><br><br>
+    {% block content %}{% endblock %}
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
