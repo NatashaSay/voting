@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.generic import ListView
-from votedata.models import Voting, VotingOptions, Profile
+from votedata.models import Voting, VotingOptions, Profile, User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import getallvotings, getuserinfo
 from .forms import UploadDocumentForm
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 @login_required
 def home(request):
@@ -41,7 +42,7 @@ def profile(request):
     #
     #     response_data['title'] = title
     #     response_data['description'] = description
-    # 
+    #
     #     Post.objects.create(
     #         title = title,
     #         description = description,
@@ -65,3 +66,11 @@ class ProfileView(LoginRequiredMixin, ListView):
         #print (Voting.objects.all(), VotingOptions.objects.all())
         #return Voting.objects.all()
         return context
+
+
+@login_required
+def editprofile(request):
+    current_user = request.user
+    username = current_user.username
+    context = getuserinfo(current_user.id)
+    return render(request, 'editprofile.html', {'context': context,'username': username})

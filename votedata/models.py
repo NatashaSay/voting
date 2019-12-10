@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
+from PIL import Image
 
 
 class Profile(models.Model):
@@ -14,6 +15,8 @@ class Profile(models.Model):
     age = models.IntegerField(default=0,blank=True)
     bio = models.TextField(max_length=300, blank=True)
     birthdate = models.DateField(null=True, blank=True)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"

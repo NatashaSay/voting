@@ -1,0 +1,63 @@
+{% extends 'basemain.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <form class="" action="" method="post">
+      {% csrf_token %}
+      <div class="col-md-4 col-md-offset-4">
+        <div class="input-group input-group">
+           <span class="input-group"></span>
+
+           <div class="image text-center">
+             <img src="{{user.profile.image.url}}" alt="">
+           </div><br>
+           <div class="text-center">
+              <button type="" class="btn btn-default" name="button">Change photo</button>
+           </div><br>
+
+           <input type="text" class="form-control" value="{{username}}" disabled>
+         </div>
+       </div>
+
+      <div class="col-md-4 col-md-offset-4"><br>
+        <div class="input-group input-group">
+           <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+           <input type="text" class="form-control" value="{{context.firstname}}" enable="disabled ">
+         </div>
+       </div>
+       <div class="col-md-4 col-md-offset-4"><br>
+         <div class="input-group input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <input type="text" class="form-control" value="{{context.lastname}}">
+          </div>
+        </div>
+        <div class="col-md-4 col-md-offset-4"><br>
+          <div class="input-group input-group">
+             <span class="input-group"></span>
+             <input type="text" class="form-control" value="{{context.age}}">
+           </div>
+         </div>
+         <div class="col-md-4 col-md-offset-4"><br>
+           <div class="input-group input-group">
+              <span class="input-group"></span>
+              <input type="text" class="form-control" value="{{context.city}}">
+            </div>
+          </div>
+          <div class="col-md-4 col-md-offset-4"><br>
+            <div class="input-group input-group">
+               <span class="input-group"></span>
+               <textarea  rows="8" cols="80" class="form-control" value="">{{context.bio}}</textarea>
+             </div>
+           </div>
+           <div class="col-md-4 col-md-offset-4"><br>
+             <button type="submit" name="button" class="btn btn-primary">Save</button>
+           </div>
+    </form>
+
+  </div>
+</div>
+<br><br>
+
+{% endblock %}
