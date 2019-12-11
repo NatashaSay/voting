@@ -6,9 +6,10 @@ from django.views.generic import ListView
 from votedata.models import Voting, VotingOptions, Profile, User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import getallvotings, getuserinfo
-from .forms import UploadDocumentForm
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from .forms import ProfileForm
+
 
 @login_required
 def home(request):
@@ -73,4 +74,19 @@ def editprofile(request):
     current_user = request.user
     username = current_user.username
     context = getuserinfo(current_user.id)
-    return render(request, 'editprofile.html', {'context': context,'username': username})
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            #profile.author = request.user
+            #profile.published_date = timezone.now()
+            profile.save()
+            print('hello')
+            return redirect('home')
+
+    else:
+        form = ProfileForm(instance=context)
+        print('not hello')
+
+    return render(request, 'editprofile.html', {'context': context,'username': username, 'form': form})

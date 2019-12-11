@@ -12,7 +12,7 @@ Profile page
         <div class="image">
           <img src="{{user.profile.image.url}}" alt="">
         </div>
-        <br>  
+        <br>
         <p> FIRSTNAME:   {{context.firstname}}</p>
         <p> LASTNAME:    {{context.lastname}}</p>
         <p>AGE:          {{context.age}}</p>
@@ -22,6 +22,6 @@ Profile page
   </div>
 </div>
 
-
+<a href="{% url 'editprofile' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 
 {% endblock %}
