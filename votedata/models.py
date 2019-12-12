@@ -21,6 +21,18 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
 
+
+    def save(self):
+        print('not work')
+        super().save()
+
+    # def save(self, *args, **kw):
+    #     super(Profile, self).save(*args, **kw)
+    #     self.instance.user.firstname = self.cleaned_data.get('firstname')
+    #     self.instance.user.lastname = self.cleaned_data.get('lastname')
+    #     self.instance.user.city = self.cleaned_data.get('city')
+    #     self.instance.user.save()
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

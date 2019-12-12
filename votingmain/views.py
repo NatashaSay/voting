@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -8,7 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import getallvotings, getuserinfo
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from .forms import ProfileForm
+from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm
+from django.contrib import messages
 
 
 @login_required
@@ -69,24 +70,58 @@ class ProfileView(LoginRequiredMixin, ListView):
         return context
 
 
+
+
 @login_required
 def editprofile(request):
-    current_user = request.user
-    username = current_user.username
-    context = getuserinfo(current_user.id)
-
-    if request.method == "POST":
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            #profile.author = request.user
-            #profile.published_date = timezone.now()
-            profile.save()
-            print('hello')
-            return redirect('home')
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
 
     else:
-        form = ProfileForm(instance=context)
-        print('not hello')
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    return render(request, 'editprofile.html', {'context': context,'username': username, 'form': form})
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'editprofile.html', context)
+# @login_required
+# def editprofile(request):
+#     current_user = request.user
+#     username = current_user.username
+#     context = getuserinfo(current_user.id)
+#
+#     #if request.method == "POST":
+#         #form = ProfileForm(request.POST, instance=request.user,  prefix='form')
+#
+#         #form = ProfileForm(request.POST, instance=request.user)
+#         # if form.is_valid():
+#         #     form.save()
+#         #     q = Profile() #import your own User model here.
+#         #     q.username = request.user.username
+#         #     q.save()
+#         #     return redirect('home')
+#
+#         if form.is_valid():
+#             prof = form.save(commit=False)
+#             prof.save()
+#             messages.success(request, f'Your account has been updated!')
+#             print('hello')
+#             print(prof.profile.age)
+#             return redirect('home')
+#
+#     else:
+#         form = ProfileForm(instance=context, prefix='form')
+#         print('not hello')
+#
+#     return render(request, 'editprofile.html', {'context': context,'username': username, 'form': form})
