@@ -20,7 +20,12 @@ from django.views.generic import (
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    voting = Voting.objects.all()
+    context = {'voting' : voting}
+    print('-----------------------')
+    print(context)
+    print('-----------------------')
+    return render(request, 'home.html', context)
 
 
 
@@ -29,9 +34,14 @@ class HomeView(LoginRequiredMixin, ListView):
     template_name = 'home.html'
 
     def get_queryset(self):
-        context = getallvotings()
+        #context = getallvotings()
+        #voting = Voting.objects.get()
+        voting = getallvotings()
+        context = {'voting' : voting}
+
         print('--------')
         print(context)
+        print(voting)
         print('--------')
         #print (Voting.objects.all(), VotingOptions.objects.all())
         #return Voting.objects.all()
@@ -117,6 +127,8 @@ class VotingDetailView(DetailView):
     model = Voting
 
 
+def vote_new(request, pk):
+    print(pk)
 
 # @login_required
 # def editprofile(request):
