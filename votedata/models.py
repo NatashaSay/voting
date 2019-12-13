@@ -5,6 +5,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
 from PIL import Image
+from django.urls import reverse
+
 
 
 class Profile(models.Model):
@@ -57,6 +59,9 @@ class Voting(models.Model):
 
     def __str__(self):
         return f"{self.title} {self.info} {self.created}"
+
+    # def get_absolute_url(self):
+    #     return reverse('votingdetails', kwargs={'pk': self.pk})
 
 
 class VotingOptions(models.Model):

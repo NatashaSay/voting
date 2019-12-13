@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.views.generic import ListView
 from votedata.models import Voting, VotingOptions, Profile, User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import getallvotings, getuserinfo
@@ -10,6 +9,13 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 
 
 @login_required
@@ -95,6 +101,23 @@ def editprofile(request):
     }
 
     return render(request, 'editprofile.html', context)
+
+
+@login_required
+def votingdetails(request, pk):
+    voting = get_object_or_404(Voting, pk=pk)
+    print(voting)
+    #context = {}
+    #context['voting'] = voting
+    return render(request, 'votings/votingdetails.html', {'context':voting})
+
+
+class VotingDetailView(DetailView):
+    template_name = 'votings/votingdetails.html'
+    model = Voting
+
+
+
 # @login_required
 # def editprofile(request):
 #     current_user = request.user
