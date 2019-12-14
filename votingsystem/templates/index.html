@@ -18,6 +18,13 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href=" {% static 'animate.css'%}">
+    <script src="{% static 'js/wow.min.js'%}"></script>
+    <script>
+       new WOW().init();
+    </script>
   </head>
   <body>
 
@@ -72,7 +79,7 @@
         <div class="row text-left">
           <div class="col-md-5 col-md-offset-1 main-text">
             <div class="pad">
-              Blockchain-based voting system
+              <p>Blockchain-based voting system</p>
             </div><hr>
             <p class="sub-text">
                We present a completely new service that is based on decentralized blockchain technology. Now the voting system can be implemented in state and business enterprises, because it is safe and transparent. Wide settings for any type of voting and statistically generated result.
@@ -81,7 +88,7 @@
                 <button type="button" class="btn btn-default login-btn" name="button"><a href="login/">Log in</a></button>
 
           </div>
-          <div class="col-md-5 col-md-offset-1 pull-right">
+          <div class="col-md-5 col-md-offset-1 pull-right wow zoomIn" data-wow-duration="0.5s" data-wow-delay="0.5s" data-wow-offset="0" data-wow-iteration="1">
           <img src="{% static 'img/sign-up-3.png' %}?version=1" alt="" class="img-responsive main-image">
         </div>
         </div>
@@ -91,12 +98,90 @@
     <section id="about">
       <div class="container">
         <div class="row">
-
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <p class="about-main">About</p>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-md-offset-1 text-center">
+              <p class="about-sub-main">Idea</p>
+              <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="col-md-4 col-md-offset-2 text-center">
+              <p class="about-sub-main">Task</p>
+              <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <p>hello</p>
     </section>
 
+    <section id="how">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-11 col-md-offset-1">
+            <p class="how-main-text">How it works?</p>
+          </div>
+          <div class="row">
+            <div class="col-md-3 wow bounceInLeft" data-wow-duration="1s" data-wow-delay="1s" data-wow-offset="0" data-wow-iteration="1">
+              <p class="how-item"><div class="number">1</div>
+                <p class="how-item">Secure</p>
+              </p>
+              <p class="how-item"><div class="number">2</div>
+                <p class="how-item">Blockchain-based</p>
+              </p>
+            </div>
+            <div class="col-md-6 text-center how-img">
+              <img src="{% static 'img/cherry.png' %}?version=1" alt="" class="img-responsive how-image">
+            </div>
+            <div class="col-md-3 how-col wow bounceInRight" data-wow-duration="1s" data-wow-delay="2s" data-wow-offset="1" data-wow-iteration="1">
+              <p class="how-item"><div class="number">3</div>
+                <p class="how-item">Transparently</p>
+              </p>
+              <p class="how-item"><div class="number">4</div>
+                <p class="how-item">Сonveniently</p>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-2">
+            <img src="{% static 'img/cherry-done.png' %}?version=1" alt="" class="img-responsive footer-img">
+          </div>
+          <div class="col-md-6 text-center">
+            <p class="how-main-text">Contacts</p>
+            <div class="contacts-item text-left">
+              <img src="{% static 'img/email.png' %}?version=1" alt="" class="img-responsive how-image contacts-item">
+                <p class="how-item-contact">&nbsp;&nbsp;<a href="#" class="contacts-a">nataliia.saichyshyna@nure.ua</a></p>
+              </p>
+              <img src="{% static 'img/smartphone.png' %}?version=1" alt="" class="img-responsive how-image contacts-item">
+                <p class="how-item-contact">&nbsp;&nbsp;<a href="#" class="contacts-a">+380 99 288 50 26</a></p>
+              </p>
+              <img src="{% static 'img/telegram.png' %}?version=1" alt="" class="img-responsive how-image contacts-item">
+                <p class="how-item-contact">&nbsp;&nbsp;<a href="#" class="contacts-a">nataliia.say</a></p>
+              </p>
+              <img src="{% static 'img/github.png' %}?version=1" alt="" class="img-responsive how-image contacts-item">
+                <p class="how-item-contact">&nbsp;&nbsp;<a href="#" class="contacts-a">NatashaSay</a></p>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <p class="footer">@2019 Blockchain-based voting system</p>
+          </div>
+        </div>
+      </div>
+    </section>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
