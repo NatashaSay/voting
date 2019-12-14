@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from votedata.models import Profile, User
+from votedata.models import Profile, User, Voting
 from django.contrib.auth.forms import UserChangeForm
 
 
@@ -20,6 +20,14 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+
     class Meta:
         model = Profile
         fields = ['image', 'firstname', 'lastname', 'city', 'age', 'bio', 'birthdate']
+
+
+class VotingCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Voting
+        fields = ['title', 'info', 'finished', 'is_available', 'is_anon', 'mode']

@@ -23,11 +23,16 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
 
-
     def save(self):
-        print('not work')
+        print('not wo')
         super().save()
 
+    # def getid(self, i):
+    #     profile = Profile.objects.all().filter(user_id=i)
+    #     print(profile.id, 'ID')
+    #     return profile.id
+
+    
     # def save(self, *args, **kw):
     #     super(Profile, self).save(*args, **kw)
     #     self.instance.user.firstname = self.cleaned_data.get('firstname')
@@ -47,6 +52,7 @@ def save_user_profile(sender, instance, **kwargs):
     except ObjectDoesNotExist:
         Profile.objects.create(user=instance)
 
+
 class Voting(models.Model):
     userprofile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, blank=False)
@@ -59,6 +65,10 @@ class Voting(models.Model):
 
     def __str__(self):
         return f"{self.title} {self.info} {self.created}"
+
+    # def save(self):
+    #     print('it works')
+    #     super.save()
 
     # def get_absolute_url(self):
     #     return reverse('votingdetails', kwargs={'pk': self.pk})

@@ -1,13 +1,15 @@
 {% extends 'basemain.html'%}
 {% block content %}
+
+<p>Details</p>
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <p>{{context.userprofile}}</p>
-      <p>{{context.title}}</p>
-      <p>{{context.info}}</p>
-      <p>{{context.created}}</p>
-      <p>{{context.finished}}</p>
+      <p>{{object.userprofile}}</p>
+      <p>{{object.title}}</p>
+      <p>{{object.info}}</p>
+      <p>{{object.created}}</p>
+      <p>{{object.finished}}</p>
     </div>
   </div>
 </div>

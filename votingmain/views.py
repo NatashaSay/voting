@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import getallvotings, getuserinfo
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm
+from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm, VotingCreateForm
 from django.contrib import messages
 from django.views.generic import (
     ListView,
@@ -20,32 +20,23 @@ from django.views.generic import (
 
 @login_required
 def home(request):
-    voting = Voting.objects.all()
-    context = {'voting' : voting}
-    print('-----------------------')
-    print(context)
-    print('-----------------------')
+    context = {
+        'voting': Voting.objects.all()
+    }
     return render(request, 'home.html', context)
 
 
 
-class HomeView(LoginRequiredMixin, ListView):
-    model = Voting
-    template_name = 'home.html'
-
-    def get_queryset(self):
-        #context = getallvotings()
-        #voting = Voting.objects.get()
-        voting = getallvotings()
-        context = {'voting' : voting}
-
-        print('--------')
-        print(context)
-        print(voting)
-        print('--------')
-        #print (Voting.objects.all(), VotingOptions.objects.all())
-        #return Voting.objects.all()
-        return context
+# class HomeView(LoginRequiredMixin, ListView):
+#     model = Voting
+#     template_name = 'home.html'
+#
+#     def get_queryset(self):
+#         #context = getallvotings()
+#
+#         #print (Voting.objects.all(), VotingOptions.objects.all())
+#         #return Voting.objects.all()
+#         return context
 
 
 @login_required
@@ -128,7 +119,38 @@ class VotingDetailView(DetailView):
 
 
 def vote_new(request, pk):
-    print(pk)
+    voting = get_object_or_404(Voting, pk=pk)
+    print(pk, '----')
+    return render(request, 'votings/votingdetails.html', {'context':voting})
+
+
+def createvoting(request):
+    if request.method == 'POST':
+        form = VotingCreateForm(request.POST)
+        if form.is_valid():
+            current_user = request.user
+            profile = Profile.objects.get(user_id=current_user.id)
+            print(profile.id)
+            print(current_user.id)
+            form.instance.userprofile_id = profile.id
+            print('---------------')
+            form.save()
+            return redirect('home')
+        else:
+            return HttpResponse('not valid')
+    else:
+        model = Voting
+        form = VotingCreateForm(instance=request.user)
+        return render(request, 'votings/votingcreate.html', {'form' : form})
+
+
+
+
+
+
+
+
+
 
 # @login_required
 # def editprofile(request):

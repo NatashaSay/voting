@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -19,8 +21,8 @@
   </head>
   <body>
 
-    <section>
-      <nav class="navbar navbar-default">
+    <section id="menu">
+      <nav class="navbar navbar-fixed-top">
         <div class="container-fluid">
 
           <!-- BRAND -->
@@ -43,21 +45,59 @@
               <li><a href="#">About</a></li>
               <li><a href="#">Blockchain</a></li>
               <li><a href="#">Contacts</a></li>
-              <li><button type="button" class="btn btn-default" name="button"><a href="login/">Log in</a></button></li>
-            </ul>
+              <li><button type="button" class="btn btn-default nav-button" name="button"><a href="login/">Log in</a></button></li>
 
+              <li class="nav-button-lan">
+                <div class="dropdown">
+                  <button class="btn btn-default btn-default-border dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    en
+                    <span class="caret"></span>
+                  </button>
+
+                    <ul class="dropdown-menu lan-width" aria-labelledby="dropdownMenu1">
+                      <li class="lan-width"><a href="#">ua</a></li>
+                    </ul>
+
+                </div>
+              </li>
+            </ul>
             <!-- Text -->
           </div>
         </div>
       </nav>
     </section>
 
+    <section id="main">
+      <div class="container">
+        <div class="row text-left">
+          <div class="col-md-5 col-md-offset-1 main-text">
+            <div class="pad">
+              Blockchain-based voting system
+            </div><hr>
+            <p class="sub-text">
+               We present a completely new service that is based on decentralized blockchain technology. Now the voting system can be implemented in state and business enterprises, because it is safe and transparent. Wide settings for any type of voting and statistically generated result.
+            </p>
+                <!-- <button type="button" class="btn btn-prinary" name="button"><a href="signup/">Sign up</a></button> -->
+                <button type="button" class="btn btn-default login-btn" name="button"><a href="login/">Log in</a></button>
 
+          </div>
+          <div class="col-md-5 col-md-offset-1 pull-right">
+          <img src="{% static 'img/sign-up-3.png' %}?version=1" alt="" class="img-responsive main-image">
+        </div>
+        </div>
+      </div>
+    </section>
 
-    <p>blockchain-based voting system</p>
-    <button type="button" class="btn btn-prinary" name="button"><a href="signup/">Sign up</a></button>
-    <button type="button" class="btn btn-default" name="button"><a href="login/">Log in</a></button>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <section id="about">
+      <div class="container">
+        <div class="row">
+
+        </div>
+      </div>
+      <p>hello</p>
+    </section>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

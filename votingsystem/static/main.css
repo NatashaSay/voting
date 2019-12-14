@@ -1,0 +1,76 @@
+body{
+  background-color: #E5F1F6;
+}
+
+.navbar{
+  background-color: white;
+}
+
+#menu{
+  color: #EE7155;
+  height: 8.5 vh;
+  margin-bottom: 0;
+  background-color: white;
+}
+
+#main{
+  padding-top: 12vh;
+  background-color: #E5F1F6;
+  height: 100vh;
+
+}
+
+hr{
+  border-top: 1px solid lightgrey;
+  margin-top: 0;
+}
+
+a{
+  color: #EE7155;
+  font-weight: bolder;
+}
+
+.nav-button{
+  margin-top: 12%;
+}
+
+.nav-button-lan{
+  margin-top: 1.7%;
+  border-color: white;
+}
+
+.btn-default-border{
+  border-color: white;
+}
+
+.lan-width{
+  width: 50px;
+}
+
+.main-text{
+  padding-top: 11vh;
+  font-size: 35pt;
+  color: #7DC9E7;
+  color: #208CB7;
+}
+
+.sub-text{
+  font-size: 12pt;
+  font-weight:500;
+  line-height: 2.0;
+  color: #7DC9E7;
+}
+
+.login-btn{
+  font-size: 13pt;
+}
+
+.main-image{
+  height: 70%;
+  width: 70%;
+}
+
+#about{
+  height: 100vh;
+  background-color: white;
+}
