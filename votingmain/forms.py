@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from votedata.models import Profile, User, Voting
+from votedata.models import Profile, User, Voting, VotingOptions
 from django.contrib.auth.forms import UserChangeForm
 
 
@@ -30,4 +30,11 @@ class VotingCreateForm(forms.ModelForm):
 
     class Meta:
         model = Voting
-        fields = ['title', 'info', 'finished', 'is_available', 'is_anon', 'mode']
+        fields = ['title', 'info', 'finished', 'is_available', 'is_anon', 'mode', 'type', 'finger', 'need_password', 'pa']
+
+
+class OptionsCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = VotingOptions
+        fields = ['title']

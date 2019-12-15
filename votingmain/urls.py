@@ -14,4 +14,5 @@ urlpatterns = [
     #path('voting/', views.votingdetails, name = 'voting'),
     path('voting/<int:pk>/', VotingDetailView.as_view(), name='vote-detail'),
     path('create/', views.createvoting, name='vote-create'),
+    path('createoptions/', views.createoptions, name='options-create'),
 ]

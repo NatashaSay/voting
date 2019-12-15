@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-offset-3">
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
@@ -12,11 +12,44 @@
             {{ form | crispy}}
         </fieldset>
         <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>
+          <button class="btn btn-outline-info" type="submit">Create Options -></button>
         </div>
       </form>
+      <!-- <form method="POST">
+        {% csrf_token %}
+        <div class=container>
+          <button class=add-group>Add options</button>
+        </div>
+
+      </form> -->
     </div>
   </div>
 </div>
+
+<!-- <script id=group-template type=text/html>
+  <section class=group data-i={{g}}>
+    <p>
+      <label for=g-{{g}}>Option {{g}}</label>
+      <input type=text id=g-{{g}} />
+      <button class=remove-group>X</button>
+    </p>
+  </section>
+</script> -->
+
+
+
+
+
+<!-- <script type="text/javascript">
+  $(document).on('click', ".container .add-group", function() {
+  var container = $(this).closest(".container");
+  container.append(
+    $("#group-template").html()
+    .replace(/\{\{g\}\}/g, container.children(".group").last().data("i") + 1 || 1)
+  );
+}).on('click', ".remove-group", function() {
+  $(this).closest(".group").remove();
+});
+</script> -->
 
 {% endblock %}

@@ -22,10 +22,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href=" {% static 'animate.css'%}">
     <script src="{% static 'js/wow.min.js'%}"></script>
-    <script>
-       new WOW().init();
-    </script>
-  </head>
+    <script src="{% static 'js/script.js'%}"></script>
+
   <body>
 
     <section id="menu">
@@ -40,7 +38,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">BB Voting</a>
+            <a class="navbar-brand" href="#menu">BB Voting</a>
           </div>
 
           <!-- COLLAPSIBLE NAVBAR -->
@@ -48,10 +46,10 @@
 
             <!-- Links -->
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Blockchain</a></li>
-              <li><a href="#">Contacts</a></li>
+              <li class="active"><a href="#menu">Home<span class="sr-only">(current)</span></a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#how">Blockchain</a></li>
+              <li><a href="#contacts">Contacts</a></li>
               <li><button type="button" class="btn btn-default nav-button" name="button"><a href="login/">Log in</a></button></li>
 
               <li class="nav-button-lan">
@@ -181,6 +179,7 @@
           </div>
         </div>
       </div>
+      <div ID = "toTop" ><i class="fa fa-angle-up" aria-hidden="true"></i></div>
     </section>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

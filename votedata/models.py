@@ -32,7 +32,7 @@ class Profile(models.Model):
     #     print(profile.id, 'ID')
     #     return profile.id
 
-    
+
     # def save(self, *args, **kw):
     #     super(Profile, self).save(*args, **kw)
     #     self.instance.user.firstname = self.cleaned_data.get('firstname')
@@ -61,7 +61,23 @@ class Voting(models.Model):
     finished = models.DateTimeField(auto_now=False, blank=False)
     is_available = models.BooleanField(default=True)
     is_anon = models.BooleanField(default=False)
-    mode = models.CharField(max_length=50, blank=False)
+    finger = models.BooleanField(default=False)
+    need_password = models.BooleanField(default=False)
+    pa = models.CharField(max_length=200, blank=True)
+
+    MODE = (
+    ('o', 'One choice'),
+    ('m', 'Multiple choice'),
+    )
+
+    TYPE = (
+    ('y', 'Yes'),
+    ('n', 'No'),
+    ('u', 'Unknown'),
+    )
+
+    mode = models.CharField(max_length=50, choices=MODE, blank=False, default=0)
+    type = models.CharField(max_length=1, choices=TYPE)
 
     def __str__(self):
         return f"{self.title} {self.info} {self.created}"

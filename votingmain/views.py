@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from votedata.models import Voting, VotingOptions, Profile, User
@@ -7,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import getallvotings, getuserinfo
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm, VotingCreateForm
+from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm, VotingCreateForm, OptionsCreateForm
 from django.contrib import messages
 from django.views.generic import (
     ListView,
@@ -127,15 +128,21 @@ def vote_new(request, pk):
 def createvoting(request):
     if request.method == 'POST':
         form = VotingCreateForm(request.POST)
+        print(form)
         if form.is_valid():
             current_user = request.user
             profile = Profile.objects.get(user_id=current_user.id)
             print(profile.id)
             print(current_user.id)
             form.instance.userprofile_id = profile.id
-            print('---------------')
             form.save()
-            return redirect('home')
+            print(form.voting)
+            context = {
+                'voting': 'hello'
+            }
+            return render(request, 'votings/votingoptions.html', context)
+            #return redirect('options-create', context)
+            #return reverse('options-create', kwargs=context)
         else:
             return HttpResponse('not valid')
     else:
@@ -146,7 +153,25 @@ def createvoting(request):
 
 
 
+def createoptions(request, context):
+    if request.method == 'POST':
+        form = OptionsCreateForm(request.POST)
+        if form.is_valid():
+            voting = Voting.objects.get(voting_id=18)
+            print(voting)
+            form.instance.voting_id = 18
+            print('Start')
+            print(form)
+            print('****************')
+            #form.save()
+    else:
+        form = OptionsCreateForm(instance=request.user)
 
+    context = {
+        'form': form
+    }
+    print(context)
+    return render(request, 'votings/votingoptions.html', context)
 
 
 
