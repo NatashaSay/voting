@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from . import views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from votedata.models import Voting, VotingOptions, Profile, User
@@ -128,21 +129,13 @@ def vote_new(request, pk):
 def createvoting(request):
     if request.method == 'POST':
         form = VotingCreateForm(request.POST)
-        print(form)
         if form.is_valid():
             current_user = request.user
             profile = Profile.objects.get(user_id=current_user.id)
-            print(profile.id)
-            print(current_user.id)
             form.instance.userprofile_id = profile.id
             form.save()
-            print(form.voting)
-            context = {
-                'voting': 'hello'
-            }
-            return render(request, 'votings/votingoptions.html', context)
-            #return redirect('options-create', context)
-            #return reverse('options-create', kwargs=context)
+            request.session['vote_id'] = form.save().id
+            return redirect( 'options-create')
         else:
             return HttpResponse('not valid')
     else:
@@ -152,26 +145,19 @@ def createvoting(request):
 
 
 
+def createoptions(request):
+    form = OptionsCreateForm(instance=request.user)
 
-def createoptions(request, context):
     if request.method == 'POST':
         form = OptionsCreateForm(request.POST)
         if form.is_valid():
-            voting = Voting.objects.get(voting_id=18)
-            print(voting)
-            form.instance.voting_id = 18
-            print('Start')
-            print(form)
-            print('****************')
-            #form.save()
+            vote_id = request.session['vote_id']
+            form.instance.voting_id = vote_id
+            form.save()
     else:
         form = OptionsCreateForm(instance=request.user)
 
-    context = {
-        'form': form
-    }
-    print(context)
-    return render(request, 'votings/votingoptions.html', context)
+    return render(request, 'votings/votingoptions.html', {'form': form})
 
 
 
