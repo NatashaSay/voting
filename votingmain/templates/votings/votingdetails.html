@@ -5,12 +5,43 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <p>{{object.userprofile}}</p>
-      <p>{{object.title}}</p>
-      <p>{{object.info}}</p>
-      <p>{{object.created}}</p>
-      <p>{{object.finished}}</p>
-      <p>{{object.type}}</p>
+      <p>{{username}}</p>
+      <p>{{title}}</p>
+      <p>{{info}}</p>
+      <p>{{created}}</p>
+      <p>{{finished}}</p>
+      <p>{{theme}}</p>
+      <p>Options</p>
+      {% if view == 'guest' %}
+      <form method="post">
+        {% csrf_token %}
+        {% for item in options %}
+          {% if mode == 'o' %}
+          <div class="radio">
+            <label><input type="radio" name="optradio" checked>{{item.title}}</label>
+          </div>
+          {% else %}
+          <div class="checkbox">
+            <label><input type="checkbox" value="">{{item.title}}</label>
+          </div>
+          {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" name="button">Vote</button>
+      </form>
+      {% else %}
+      <p>Its your voting</p>
+      {% for item in options %}
+        {% if mode == 'o' %}
+        <div class="radio disabled">
+          <label><input type="radio" name="optradio" checked>{{item.title}}</label>
+        </div>
+        {% else %}
+        <div class="checkbox disabled">
+          <label><input type="checkbox" value="">{{item.title}}</label>
+        </div>
+        {% endif %}
+      {% endfor %}
+      {% endif %}
     </div>
   </div>
 </div>

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from votedata.models import Voting, VotingOptions, Profile, User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from votingsystem.dbqueries import getallvotings, getuserinfo
+from votingsystem.dbqueries import *
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm, VotingCreateForm, OptionsCreateForm
@@ -108,24 +108,56 @@ def editprofile(request):
 
 @login_required
 def votingdetails(request, pk):
+    voting = getvoting(pk)
     voting = get_object_or_404(Voting, pk=pk)
-    print(voting)
-    #context = {}
-    #context['voting'] = voting
+
     return render(request, 'votings/votingdetails.html', {'context':voting})
 
 
-class VotingDetailView(DetailView):
+class VotingDetailView(LoginRequiredMixin, DetailView):
     template_name = 'votings/votingdetails.html'
     model = Voting
 
-
-def vote_new(request, pk):
-    voting = get_object_or_404(Voting, pk=pk)
-    print(pk, '----')
-    return render(request, 'votings/votingdetails.html', {'context':voting})
+    def get_queryset(request):
+        voting = request.session['vote_id']
+        print(voting)
 
 
+# def vote_new(request, pk):
+#     voting = get_object_or_404(Voting, pk=pk)
+#     print(pk, '----')
+#     return render(request, 'votings/votingdetails.html', {'context':voting})
+
+@login_required
+def votedetails(request, pk):
+    voting = getvoting(pk)
+    username = getprofile(voting.userprofile_id)
+    options = getoptions(pk)
+    profile = getidprofile(request.user.id)
+    creator = voting.userprofile_id
+    view = 'guest'
+    print('-----------')
+    if (creator == profile):
+        view = 'creator'
+    print()
+    #print(options.title)
+    context = {
+        'username': username.firstname,
+        #Add
+        'title': voting.title,
+        'info': voting.info,
+        'theme': voting.theme,
+        'created': voting.created,
+        'finished': voting.finished,
+        #options
+        'options': options,
+        'mode': voting.mode,
+        'view': view
+    }
+    return render(request, 'votings/votingdetails.html', context)
+
+
+@login_required
 def createvoting(request):
     if request.method == 'POST':
         form = VotingCreateForm(request.POST)
@@ -144,7 +176,7 @@ def createvoting(request):
         return render(request, 'votings/votingcreate.html', {'form' : form})
 
 
-
+@login_required
 def createoptions(request):
     form = OptionsCreateForm(instance=request.user)
 

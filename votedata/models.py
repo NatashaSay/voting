@@ -59,6 +59,7 @@ class Voting(models.Model):
     info = models.TextField(max_length=1000, default='Enter')
     created = models.DateTimeField(auto_now=True, blank=False)
     finished = models.DateTimeField(auto_now=False, blank=False)
+    theme = models.CharField(max_length=200, blank=True)
     is_available = models.BooleanField(default=True)
     is_anon = models.BooleanField(default=False)
     finger = models.BooleanField(default=False)

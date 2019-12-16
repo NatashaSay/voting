@@ -30,7 +30,7 @@ class VotingCreateForm(forms.ModelForm):
 
     class Meta:
         model = Voting
-        fields = ['title', 'info', 'finished', 'is_available', 'is_anon', 'mode', 'type', 'finger', 'need_password', 'pa']
+        fields = ['title', 'info', 'finished', 'theme', 'is_anon', 'mode', 'type', 'finger', 'need_password', 'pa']
 
 
 class OptionsCreateForm(forms.ModelForm):
