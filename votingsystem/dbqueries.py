@@ -1,5 +1,7 @@
 from votedata.models import Voting, VotingOptions, Result, Profile
 from django.db.models import Q
+from datetime import datetime, timedelta, time
+from django.utils import timezone
 
 def getallvotings(date_sort=False, date_sort_reversed=False):
     votings = Voting.objects.all()
@@ -31,3 +33,14 @@ def getprofile(user_id):
 def getidprofile(user_id):
     profileid = getuserinfo(user_id).id
     return profileid
+
+
+def getrelevantvotings(date_sort=False, date_sort_reversed=False):
+    now = timezone.now()
+    votings = Voting.objects.all()
+    for item in votings:
+        if now > item.finished:
+            item.is_available=False
+            item.save()
+
+    return votings.exclude(is_available=False)

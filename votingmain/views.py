@@ -25,6 +25,7 @@ def home(request):
     context = {
         'voting': Voting.objects.all()
     }
+    print(getrelevantvotings())
     return render(request, 'home.html', context)
 
 
