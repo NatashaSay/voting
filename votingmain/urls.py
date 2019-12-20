@@ -18,4 +18,6 @@ urlpatterns = [
 
     path('create/', views.createvoting, name='vote-create'),
     path('createoptions/', views.createoptions, name='options-create'),
+
+    path('mypolls/', views.mypolls, name='mypolls'),
 ]

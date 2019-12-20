@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from . import views
+from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from votedata.models import Voting, VotingOptions, Profile, User
@@ -179,22 +180,28 @@ def createvoting(request):
 
 @login_required
 def createoptions(request):
-    form = OptionsCreateForm(instance=request.user)
+    args = {}
+    args.update(csrf(request))
+    #form = OptionsCreateForm(instance=request.user)
 
     if request.method == 'POST':
-        form = OptionsCreateForm(request.POST)
-        if form.is_valid():
-            vote_id = request.session['vote_id']
-            form.instance.voting_id = vote_id
-            form.save()
-    else:
-        form = OptionsCreateForm(instance=request.user)
+        options = request.POST.get('min-2')
+        option = options.split(',')
+        for i in option:
+            request.session['title'] = i
+            VotingOptions.objects.create(title=i, voting_id=request.session['vote_id'])
 
-    return render(request, 'votings/votingoptions.html', {'form': form})
+        return redirect('home')
+    #else:
+        #form = OptionsCreateForm()
+
+    return render(request, 'votings/votingoptions.html')
 
 
 
-
+@login_required
+def mypolls(request):
+    return render(request, 'mypolls.html')
 
 # @login_required
 # def editprofile(request):

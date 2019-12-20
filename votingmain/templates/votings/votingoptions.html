@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-4 col-md-offset-3">
       <form method="POST" enctype="multipart/form-data">
@@ -13,11 +13,75 @@
             <p><button type="button" name="button" class="btn btn-default">+</button></p>
         </fieldset>
         <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Save</button>
+          <!-- <button class="btn btn-outline-info" type="submit">Save</button>
         </div>
       </form>
     </div>
   </div>
-</div>
+</div> -->
+<form method="POST">
+  {% csrf_token %}
+  <div class=container>
+    <button type="button"class=add-group>Add options</button>
+    <script id=group-template type=text/html>
+      <section class=group data-i={{g}}>
+        <p>
+          <label for=g-{{g}}>Option {{g}}</label>
+          <input type=text id=g-{{g}} class="inp"/>
+          <button class=remove-group>X</button>
+        </p>
+      </section>
+    </script>
+  </div>
+  <!-- <input type="text" name="min" value=" " id="min"> -->
+  <input type="text" name="min-2" value=" " id="min-2" hidden>
+  <!-- <input type="text" name="" value="" id="la"> -->
+  <button type="submit"class="btn btn-primary save" >Save</button>
 
+</form>
+
+
+
+<script type="text/javascript">
+  $(document).on('click', ".container .add-group", function() {
+      let result = []
+      let inputs = document.getElementsByTagName('input', "");
+      for (let i of inputs){
+        if (i.value!=""){
+          i.style.borderColor="#000";
+          result.push(i.value);
+        }
+        if (i.value==""){
+          i.style.borderColor="#ff00ff";
+          return;
+        }
+      }
+    // document.getElementById("min").value = result;
+    //
+    //   alert(result);
+
+  var container = $(this).closest(".container");
+  container.append(
+    $("#group-template").html()
+    .replace(/\{\{g\}\}/g, container.children(".group").last().data("i") + 1 || 1)
+  );
+}).on('click', ".remove-group", function() {
+  $(this).closest(".group").remove();
+});
+
+
+$(document).on('click', ".save", function(){
+  alert("The paragraph was clicked.");
+  let result = [];
+  let inputs = document.getElementsByClassName('inp', "");
+  for (let i of inputs){
+    if (i.value!=""){
+
+      result.push(i.value);
+    }
+  }
+    document.getElementById("min-2").value = result;
+    // alert(result);
+});
+</script>
 {% endblock %}

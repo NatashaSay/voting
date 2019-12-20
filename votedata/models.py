@@ -63,7 +63,7 @@ class Voting(models.Model):
     is_available = models.BooleanField(default=True)
     is_anon = models.BooleanField(default=False)
     finger = models.BooleanField(default=False)
-    need_password = models.BooleanField(default=False)
+    
     pa = models.CharField(max_length=200, blank=True)
 
     MODE = (
