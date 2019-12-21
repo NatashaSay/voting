@@ -20,4 +20,5 @@ urlpatterns = [
     path('createoptions/', views.createoptions, name='options-create'),
 
     path('mypolls/', views.mypolls, name='mypolls'),
+    path('results/', views.results, name='results'),
 ]

@@ -18,7 +18,25 @@
         {% for item in options %}
           {% if mode == 'o' %}
           <div class="radio">
-            <label><input type="radio" name="optradio" checked>{{item.title}}</label>
+            <label><input type="radio" name="optradio" value="{{item.title}}">{{item.title}}</label>
+          </div>
+          {% else %}
+          <div class="checkbox">
+            <label><input type="checkbox" name="optcheck" value="{{item.title}}">{{item.title}}</label>
+          </div>
+          {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" name="button">Vote</button>
+      </form>
+
+
+      {% elif view == 'voted' %}
+      <form method="post">
+        {% csrf_token %}
+        {% for item in options %}
+          {% if mode == 'o' %}
+          <div class="radio">
+            <label><input type="radio" name="optradio" value="{{item.title}}">{{item.title}}</label>
           </div>
           {% else %}
           <div class="checkbox">
@@ -26,14 +44,17 @@
           </div>
           {% endif %}
         {% endfor %}
-        <button type="submit" class="btn btn-primary" name="button">Vote</button>
+        <p>You have already voted!</p>
+        <!-- <button type="submit" class="btn btn-primary" name="button">Vote</button> -->
       </form>
+
+
       {% else %}
       <p>Its your voting</p>
       {% for item in options %}
         {% if mode == 'o' %}
         <div class="radio disabled">
-          <label><input type="radio" name="optradio" checked>{{item.title}}</label>
+          <label><input type="radio" name="optradio" >{{item.title}}</label>
         </div>
         {% else %}
         <div class="checkbox disabled">
@@ -45,7 +66,32 @@
     </div>
   </div>
 </div>
+<!-- <button type="button" onclick="displayRadioValue()">
+       Submit
+   </button> -->
+<!-- <div id="result"></div>
+<script>
+        function displayRadioValue() {
+            document.getElementById("result").innerHTML = "";
+            var ele = document.getElementsByTagName('input');
 
+            for(i = 1; i < ele.length; i++) {
 
+                if(ele[i].type="radio") {
+
+                    if(ele[i].checked){
+
+                      alert(String(ele[i].value) + "  checked");
+                        document.getElementById("result").innerHTML
+                                += ele[i].name + " Value: "
+                                + ele[i].value + "<br>";
+                    }
+                    else{
+                      alert(String(ele[i])+ "  not checked");
+                    }
+                }
+            }
+        }
+    </script> -->
 
 {% endblock %}

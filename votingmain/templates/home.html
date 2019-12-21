@@ -50,12 +50,19 @@
         <!--<img src="..." alt="...">-->
         <div class="caption">
           <h3><a href="{% url 'vote-detail' pk=item.pk %}">{{ item.title }}</a></h3>
+          {% if not item.is_available%}
+          <p>FINISHED</p>
+          {% endif %}
           <p> User {{ item.userprofile_id }}</p>
           <p>{{ item.info }}</p>
           <p>theme - {{item.theme}}</p>
           <p>created - {{ item.created }}</p>
           <p>finished - {{ item.finished }}</p>
-          <p><a href="#" class="btn btn-primary" role="button">Vote</a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+          {% if not item.is_available%}
+          <p><a href="#" class="btn btn-primary" role="button">Details</a> <a href="#" class="btn btn-default" role="button">Statistics</a></p>
+          {% else %}
+          <p><a href="{% url 'vote-detail' pk=item.pk %}" class="btn btn-warning" role="button">Vote</a> <a href="#" class="btn btn-default" role="button">Statistics</a></p>
+          {% endif %}
         </div>
       </div>
     </div>

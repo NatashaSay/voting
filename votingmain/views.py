@@ -5,7 +5,7 @@ from . import views
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from votedata.models import Voting, VotingOptions, Profile, User
+from votedata.models import Voting, VotingOptions, Profile, User, Result
 from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import *
 from django.http import JsonResponse
@@ -24,12 +24,33 @@ from django.views.generic import (
 @login_required
 def home(request):
     context = {
-        'voting': Voting.objects.all()
+        'voting': getrelevantvotings()
     }
     print(getrelevantvotings())
     return render(request, 'home.html', context)
 
 
+@login_required
+def mypolls(request):
+    current_user = request.user
+    profile = Profile.objects.get(user_id=current_user.id)
+    voting = getuservotings(profile.id)
+
+    context = {
+        'voting': voting
+    }
+    return render(request, 'mypolls.html', context)
+
+
+@login_required
+def results(request):
+    #current_user = request.user
+    #profile = Profile.objects.get(user_id=current_user.id)
+    voting = getfinishedvotings()
+    context = {
+        'voting': voting
+    }
+    return render(request, 'results.html', context)
 
 # class HomeView(LoginRequiredMixin, ListView):
 #     model = Voting
@@ -125,24 +146,22 @@ class VotingDetailView(LoginRequiredMixin, DetailView):
         print(voting)
 
 
-# def vote_new(request, pk):
-#     voting = get_object_or_404(Voting, pk=pk)
-#     print(pk, '----')
-#     return render(request, 'votings/votingdetails.html', {'context':voting})
 
 @login_required
 def votedetails(request, pk):
+    request.session['vote_id']=pk
     voting = getvoting(pk)
     username = getprofile(voting.userprofile_id)
     options = getoptions(pk)
     profile = getidprofile(request.user.id)
     creator = voting.userprofile_id
     view = 'guest'
-    print('-----------')
     if (creator == profile):
         view = 'creator'
-    print()
-    #print(options.title)
+
+    if (alreadyvoted(profile, pk) is True):
+        view = 'voted'
+
     context = {
         'username': username.firstname,
         #Add
@@ -156,6 +175,25 @@ def votedetails(request, pk):
         'mode': voting.mode,
         'view': view
     }
+    if request.method == 'POST':
+        opt = request.POST.get('optradio')
+        if opt is not None:
+            option_id = getoptionid(pk, optradio)
+            Result.objects.create(resultprofile_id=profile, resultvoting_id=option_id)
+
+            print(opt)
+
+        else:
+            optcheck = request.POST.getlist('optcheck')
+            for item in optcheck:
+                option_id = getoptionid(pk, item)
+                Result.objects.create(resultprofile_id=profile, resultvoting_id=option_id)
+            print(optcheck)
+
+
+        return redirect('home')
+
+
     return render(request, 'votings/votingdetails.html', context)
 
 
@@ -192,16 +230,11 @@ def createoptions(request):
             VotingOptions.objects.create(title=i, voting_id=request.session['vote_id'])
 
         return redirect('home')
-    #else:
-        #form = OptionsCreateForm()
 
     return render(request, 'votings/votingoptions.html')
 
 
 
-@login_required
-def mypolls(request):
-    return render(request, 'mypolls.html')
 
 # @login_required
 # def editprofile(request):
