@@ -23,9 +23,17 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
 
-    def save(self):
+    def save(self, *args, **kwargs):
         print('not wo')
         super().save()
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+
 
     # def getid(self, i):
     #     profile = Profile.objects.all().filter(user_id=i)
@@ -63,7 +71,7 @@ class Voting(models.Model):
     is_available = models.BooleanField(default=True)
     is_anon = models.BooleanField(default=False)
     finger = models.BooleanField(default=False)
-    
+
     pa = models.CharField(max_length=200, blank=True)
 
     MODE = (

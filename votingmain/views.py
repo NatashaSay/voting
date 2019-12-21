@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from votedata.models import Voting, VotingOptions, Profile, User, Result
 from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import *
+from votingmain.statistic import *
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm, VotingCreateForm, OptionsCreateForm
@@ -92,13 +93,6 @@ class ProfileView(LoginRequiredMixin, ListView):
     template_name = 'profile.html'
 
     def get_queryset(self):
-
-        #context = getallvotings()
-        print('--------')
-        print(context)
-        print('--------')
-        #print (Voting.objects.all(), VotingOptions.objects.all())
-        #return Voting.objects.all()
         return context
 
 
@@ -181,15 +175,11 @@ def votedetails(request, pk):
             option_id = getoptionid(pk, optradio)
             Result.objects.create(resultprofile_id=profile, resultvoting_id=option_id)
 
-            print(opt)
-
         else:
             optcheck = request.POST.getlist('optcheck')
             for item in optcheck:
                 option_id = getoptionid(pk, item)
                 Result.objects.create(resultprofile_id=profile, resultvoting_id=option_id)
-            print(optcheck)
-
 
         return redirect('home')
 
@@ -233,6 +223,24 @@ def createoptions(request):
 
     return render(request, 'votings/votingoptions.html')
 
+
+
+@login_required
+def viewstatistics(request, pk):
+    voting = getvoting(pk)
+    username = getprofile(voting.userprofile_id)
+    context = {
+        'username': username.firstname,
+        'title': voting.title,
+        'info': voting.info,
+        'theme': voting.theme,
+        'created': voting.created,
+        'finished': voting.finished,
+    }
+    dataset = createset(pk)
+    #datasetage = createsetbyage(pk)
+
+    return render(request, 'votings/statistic.html', {'dataset': dataset})
 
 
 

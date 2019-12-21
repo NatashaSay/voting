@@ -21,4 +21,6 @@ urlpatterns = [
 
     path('mypolls/', views.mypolls, name='mypolls'),
     path('results/', views.results, name='results'),
+
+    path('statistic/<int:pk>/', views.viewstatistics, name='viewstatistics'),
 ]

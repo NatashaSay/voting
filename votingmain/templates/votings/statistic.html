@@ -1,0 +1,123 @@
+{% extends 'basemain.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <p>{{username}}</p>
+      <p>{{title}}</p>
+      <p>{{info}}</p>
+      <p>{{created}}</p>
+      <p>{{finished}}</p>
+      <p>{{theme}}</p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div id="container"></div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div id="container1"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('container', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Result'
+      },
+      xAxis: {
+          categories: [
+            {% for entry in dataset %}'{{ entry.option }} '{% if not forloop.last %}, {% endif %}{% endfor %}
+          ]
+      },
+      series: [{
+          name: 'Survived',
+          data: [
+            {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'orange'
+      }
+      // , {
+      //     name: 'Not survived',
+      //     data: [
+      //       {% for entry in dataset %}{{ entry.not_survived_count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+      //     ],
+      //     color: 'red'
+      // }
+      ]
+  });
+
+
+
+
+
+
+
+  Highcharts.chart('container1', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Result'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    // plotOptions: {
+    //     pie: {
+    //         allowPointSelect: true,
+    //         cursor: 'pointer',
+    //         dataLabels: {
+    //             enabled: true,
+    //             format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+    //         }
+    //     }
+    // },
+    series: [{
+        name: 'Option',
+        colorByPoint: true,
+        // data: [{
+        //     name: 'Chrome',
+        //     y: 61.41,
+        //     sliced: true,
+        //     selected: true
+        // }, {
+        //     name: 'Internet Explorer',
+        //     y: 11.84
+        // }, {
+        //     name: 'Firefox',
+        //     y: 10.85
+        // }, {
+        //     name: 'Edge',
+        //     y: 4.67
+        // }
+        // ]
+        // data: [
+        //   {% for entry in dataset %}{{ entry.count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+        // ]
+        data: [
+          {% for entry in dataset %}
+            ['{{entry.option}}',
+            {{ entry.count }}
+            ],
+            {% endfor %}
+            ]
+    }]
+});
+</script>
+{% endblock %}

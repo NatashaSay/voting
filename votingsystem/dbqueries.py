@@ -82,3 +82,51 @@ def alreadyvoted(profile_id, voting_id):
         if result.count()>0:
             return True
     return False
+
+
+def getresult(voting_id):
+    options=getoptions(voting_id)
+    list=[]
+    for i in options:
+        list.append(i.id)
+
+    #result = Result.objects.filter(resultvoting_id=option_id)
+    return list
+
+
+def getresultbyoption(option_id):
+    result = Result.objects.filter(resultvoting_id=option_id)
+    return result.count()
+
+
+def getresultbyoptionage(option_id):
+    result = Result.objects.filter(resultvoting_id=option_id)
+    return result
+
+
+def gettitleoptions(option_id):
+    option = VotingOptions.objects.get(id=option_id)
+    return option.title
+
+
+# def getages(voting_id):
+#     options=getresult(voting_id)
+#     results = []
+#     for i in options:
+#         results.append(Result.objects.filter(resultvoting_id=i))
+#
+#     profs = {}
+#     for i in results:
+#         for j in i:
+#             profs.append(j.resultprofile_id)
+#     #result=getresultbyoptionage()
+#     # for i in options:
+#     #     list.append(i.resultprofile_id)
+#     #
+#     profs = profs.distinct()
+#     ages = []
+#     res=[]
+#     for i in profs:
+#         ages.append(Profile.objects.filter(id=i))
+#
+#     return ages
