@@ -2,43 +2,72 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-4 col-md-offset-3">
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Create Options</legend>
-            {{ form | crispy}}
-            <p><button type="button" name="button" class="btn btn-default">+</button></p>
-        </fieldset>
-        <div class="form-group">
-          <!-- <button class="btn btn-outline-info" type="submit">Save</button>
+<section id="search">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="option-info">
+            <p class="text-center option-main">Your voting</p>
+            <div class="col-md-3 text-right cond">
+
+                <p> title: </p>
+                <p> info: </p>
+                <p> finished: </p>
+                <p> tags: </p>
+                <p> mode: </p>
+                <p> password: </p>
+            </div>
+            <div class="col-md-6 text-left">
+                <p>  {{voting.title}}  </p>
+                <p>  {{voting.info}}  </p>
+                <p>  {{voting.finished}}  </p>
+                <p>  {{voting.theme}}  </p>
+                <p>  {{voting.mode}}  </p>
+                <p>  {{voting.pa}}  </p>
+            </div>
+          </div>
         </div>
-      </form>
+        <!-- <div class="">
+          <p>Your voting</p>
+
+        </div>
+
+        {{voting.title}} -->
+      </div>
+      <div class="col-md-6 col-md-offset-2">
+        <form method="POST">
+          {% csrf_token %}
+          <div class=container>
+            <div class="add-button">
+              <button type="button"class=add-group>Add options</button>
+            </div>
+            <div class="">
+              <script id=group-template type=text/html>
+                <section class=group data-i={{g}}>
+                  <p class="fields">
+                    <label for=g-{{g}}> {{g}}</label>
+                    <input type=text id=g-{{g}} class="inp"/>
+                    <button class=remove-group><i class="fa fa-times" aria-hidden="true"></i></button>
+                  </p>
+                </section>
+              </script>
+            </div>
+
+          </div>
+          <!-- <input type="text" name="min" value=" " id="min"> -->
+          <input type="text" name="min-2" value=" " id="min-2" hidden>
+          <!-- <input type="text" name="" value="" id="la"> -->
+          <button type="submit"class="btn btn-primary save" >Save</button>
+        </form>
+      </div>
     </div>
   </div>
-</div> -->
-<form method="POST">
-  {% csrf_token %}
-  <div class=container>
-    <button type="button"class=add-group>Add options</button>
-    <script id=group-template type=text/html>
-      <section class=group data-i={{g}}>
-        <p>
-          <label for=g-{{g}}>Option {{g}}</label>
-          <input type=text id=g-{{g}} class="inp"/>
-          <button class=remove-group>X</button>
-        </p>
-      </section>
-    </script>
-  </div>
-  <!-- <input type="text" name="min" value=" " id="min"> -->
-  <input type="text" name="min-2" value=" " id="min-2" hidden>
-  <!-- <input type="text" name="" value="" id="la"> -->
-  <button type="submit"class="btn btn-primary save" >Save</button>
 
-</form>
+
+
+</section>
+
 
 
 
@@ -48,11 +77,11 @@
       let inputs = document.getElementsByTagName('input', "");
       for (let i of inputs){
         if (i.value!=""){
-          i.style.borderColor="#000";
+          i.style.borderColor="lightgrey";
           result.push(i.value);
         }
         if (i.value==""){
-          i.style.borderColor="#ff00ff";
+          i.style.borderColor="coral";
           return;
         }
       }
@@ -83,5 +112,54 @@ $(document).on('click', ".save", function(){
     document.getElementById("min-2").value = result;
     // alert(result);
 });
+counter=0;
+$(document).on('click', ".remove-group", function(){
+  counter--;
+
+  if(counter<1){
+    $('.save').hide();
+  }
+  let inputs = document.getElementsByClassName('inp', "");
+  input = 0;
+  for (let i of inputs){
+    input++;
+  }
+  if(input<2){
+    $('.save').hide();
+  }
+  if(input==2){
+    let inputs = document.getElementsByClassName('inp', "");
+    for (let i of inputs){
+      if(i.value==""){
+        $('.save').hide();
+      }
+    }
+  }
+});
+$(document).on('click', ".add-group", function(){
+
+
+  counter++;
+  if(counter>2){
+    $('.save').show();
+  }
+  let inputs = document.getElementsByClassName('inp', "");
+  input = 0;
+  for (let i of inputs){
+    input++;
+  }
+  if(input<2){
+    $('.save').hide();
+  }
+  if(input==2){
+    let inputs = document.getElementsByClassName('inp', "");
+    for (let i of inputs){
+      if(i.value==""){
+        $('.save').hide();
+      }
+    }
+  }
+});
+
 </script>
 {% endblock %}

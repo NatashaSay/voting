@@ -1,27 +1,68 @@
 {% extends 'basemain.html' %}
 {% block content %}
 
-Profile page
-<button type="button" class="btn btn-default" name="button"><a href="/editprofile/"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a></button>
+<section id="home">
 
-<br>
+  <div class="font"></div>
 
-<div class="container">
-  <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="image">
-          <img src="{{user.profile.image.url}}" alt="">
-        </div>
-        <br>
-        <p> FIRSTNAME:   {{context.firstname}}</p>
-        <p> LASTNAME:    {{context.lastname}}</p>
-        <p>AGE:          {{context.age}}</p>
-        <p>CITY:         {{context.city}}</p>
-        <p>BIO:          {{context.bio}}</p>
-        <p>BIRTH:        {{context.birthdate}}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 prof-actions">
+        <p class="text-center cond">Actions</p>
+        <p>you can still ...</p>
+        <ul>
+          <li><a href="/create/">Create voting</a></li>
+          <li><a href="/mypolls">View your votings</a></li>
+          <li><a href="/results/">View results</a></li>
+          <li><a href="/editprofile/">Edit your profile</a></li>
+        </ul>
       </div>
+        <div class="col-md-4 col-md-offset-1 text-center">
+          <div class="image prof-image">
+            <img src="{{user.profile.image.url}}" alt="">
+          </div>
+          <div class="prof-info">
+            <div class="row">
+
+              <div class="col-md-6 text-right cond">
+                  <p> firstname: </p>
+                  <p> lastname: </p>
+                  <p> age: </p>
+                  <p> city: </p>
+                  <p> birthdate: </p>
+                  <p> bio: </p>
+              </div>
+              <div class="col-md-6 text-left">
+                  <p>  {{context.firstname}}  </p>
+                  <p>  {{context.lastname}}  </p>
+                  <p>  {{context.age}}  </p>
+                  <p>  {{context.city}}  </p>
+                  <p>  {{context.birthdate}}  </p>
+                  <p>  {{context.bio}}  </p>
+              </div>
+        </div>
+    </div>
   </div>
+  <div class="col-md-3 col-md-offset-1 prof-actions">
+    <p class="text-center cond">Info</p>
+    <div class="row">
+
+      <div class="col-md-3 text-left cond">
+          <p> email: </p>
+          <p> created: </p>
+          <p> joined: </p>
+      </div>
+      <div class="col-md-9 text-left info">
+          <p class="mail">  {{info.email}}  </p>
+          <p>  {{info.count}}  </p>
+          <p>  {{info.date}}  </p>
+      </div>
 </div>
+  </div>
+  </div>
+  </div>
+
+</section>
 
 
 {% endblock %}

@@ -67,7 +67,7 @@
         <div class="thumbnail">
           <!--<img src="..." alt="...">-->
           <div class="caption">
-            <h3 class="text-center"><a href="{% url 'vote-detail' pk=item.pk %}">{{ item.title }}</a></h3>
+            <h3 class="text-center info"><a href="{% url 'vote-detail' pk=item.pk %}">{{ item.title }}</a></h3>
             {% if not item.is_available%}
             <p>FINISHED</p>
             {% endif %}
@@ -77,9 +77,9 @@
               <p class="">Info:{{ item.info }}...</p>
             </div>
 
-
-            <p>created - {{ item.created }}</p>
-            <p>finished - {{ item.finished }}</p>
+            <p></p>
+            <p><div class="time">created</div> - {{ item.created }}</p>
+            <p><div class="time">finished</div> - {{ item.finished }}</p>
             {% if not item.is_available%}
             <p><a href="#" class="btn btn-primary" role="button">Details</a> <a href="#" class="btn btn-default" role="button">Statistics</a></p>
             {% else %}

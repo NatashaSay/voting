@@ -1,19 +1,21 @@
 {% extends 'basemain.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load static %}
 
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <form method="POST" enctype="multipart/form-data">
+    <div class="col-md-6">
+      <form method="POST" enctype="multipart/form-data" class="create-form">
         {% csrf_token %}
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Create Voting</legend>
             {{ form | crispy}}
         </fieldset>
         <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Create Options -></button>
+
         </div>
+          <button class="btn btn-outline-info create-btn" type="submit">Create Options</button>
       </form>
       <!-- <form method="POST">
         {% csrf_token %}
@@ -22,6 +24,12 @@
         </div>
 
       </form> -->
+    </div>
+    <div class="col-md-5 col-md-offset-1">
+      <div class="create-img">
+        <img src="{% static 'img/cherry-welcome.png' %}?version=1" alt="" class="img-responsive main-image">
+      </div>
+    
     </div>
   </div>
 </div>

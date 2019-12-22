@@ -1,71 +1,115 @@
 {% extends 'basemain.html'%}
 {% block content %}
 
-<p>Details</p>
+<section id="search">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <div class="details-info">
+          <p class="text-center option-main">From user <a href="#">{{username}}</a></p>
+
+            <div class="col-md-5 text-right cond">
+
+                <p> title: </p>
+                <p> info: </p>
+                <p> created: </p>
+                <p> finished: </p>
+                <p> tags: </p>
+            </div>
+            <div class="col-md-6 text-left">
+                <p>  {{title}}  </p>
+                <p>  {{info}}  </p>
+                <p>  {{created}}  </p>
+                <p>  {{finished}}  </p>
+                <p>  {{theme}}  </p>
+            </div>
+
+
+          <section>
+
+          </section>
+
+        </div>
+
+
+        <!-- OPTIIONS -->
+
+
+      </div>
+    </div>
+
+    <section >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center" id="detail-detail">
+
+            {% if view == 'guest' %}
+            <form method="post">
+              {% csrf_token %}
+              {% for item in options %}
+                {% if mode == 'o' %}
+                <div class="radio">
+                  <label><input type="radio" name="optradio" value="{{item.title}}">{{item.title}}</label>
+                </div>
+                {% else %}
+                <div class="checkbox">
+                  <label><input type="checkbox" name="optcheck" value="{{item.title}}">{{item.title}}</label>
+                </div>
+                {% endif %}
+              {% endfor %}
+              <button type="submit" class="btn btn-primary" name="button">Vote</button>
+            </form>
+
+
+            {% elif view == 'voted' %}
+            <form method="post">
+              {% csrf_token %}
+              {% for item in options %}
+                {% if mode == 'o' %}
+                <div class="radio">
+                  <label><input type="radio" name="optradio" value="{{item.title}}">{{item.title}}</label>
+                </div>
+                {% else %}
+                <div class="checkbox">
+                  <label><input type="checkbox" value="">{{item.title}}</label>
+                </div>
+                {% endif %}
+              {% endfor %}
+              <p class="attention">You have already voted!</p>
+              <!-- <button type="submit" class="btn btn-primary" name="button">Vote</button> -->
+            </form>
+
+
+            {% else %}
+
+            {% for item in options %}
+              {% if mode == 'o' %}
+              <div class="radio disabled">
+                <label><input type="radio" name="optradio" >{{item.title}}</label>
+              </div>
+              {% else %}
+              <div class="checkbox disabled">
+                <label><input type="checkbox" value="">{{item.title}}</label>
+              </div>
+              {% endif %}
+            {% endfor %}
+            <p class="attention">Its your voting</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <p>{{username}}</p>
-      <p>{{title}}</p>
-      <p>{{info}}</p>
-      <p>{{created}}</p>
-      <p>{{finished}}</p>
-      <p>{{theme}}</p>
-      <p>Options</p>
-      {% if view == 'guest' %}
-      <form method="post">
-        {% csrf_token %}
-        {% for item in options %}
-          {% if mode == 'o' %}
-          <div class="radio">
-            <label><input type="radio" name="optradio" value="{{item.title}}">{{item.title}}</label>
-          </div>
-          {% else %}
-          <div class="checkbox">
-            <label><input type="checkbox" name="optcheck" value="{{item.title}}">{{item.title}}</label>
-          </div>
-          {% endif %}
-        {% endfor %}
-        <button type="submit" class="btn btn-primary" name="button">Vote</button>
-      </form>
-
-
-      {% elif view == 'voted' %}
-      <form method="post">
-        {% csrf_token %}
-        {% for item in options %}
-          {% if mode == 'o' %}
-          <div class="radio">
-            <label><input type="radio" name="optradio" value="{{item.title}}">{{item.title}}</label>
-          </div>
-          {% else %}
-          <div class="checkbox">
-            <label><input type="checkbox" value="">{{item.title}}</label>
-          </div>
-          {% endif %}
-        {% endfor %}
-        <p>You have already voted!</p>
-        <!-- <button type="submit" class="btn btn-primary" name="button">Vote</button> -->
-      </form>
-
-
-      {% else %}
-      <p>Its your voting</p>
-      {% for item in options %}
-        {% if mode == 'o' %}
-        <div class="radio disabled">
-          <label><input type="radio" name="optradio" >{{item.title}}</label>
-        </div>
-        {% else %}
-        <div class="checkbox disabled">
-          <label><input type="checkbox" value="">{{item.title}}</label>
-        </div>
-        {% endif %}
-      {% endfor %}
-      {% endif %}
+    <div class="col-md-6 col-md-offset-3 text-center return">
+      <button type="button" name="button" class="btn btn-default"><a href="/home">Return home</a></button>
     </div>
   </div>
 </div>
+</section>
+
 <!-- <button type="button" onclick="displayRadioValue()">
        Submit
    </button> -->

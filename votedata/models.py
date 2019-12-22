@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
-from PIL import Image
+from PIL import Image, ImageDraw
 from django.urls import reverse
 
 
@@ -17,7 +17,7 @@ class Profile(models.Model):
     age = models.IntegerField(default=0,blank=True)
     bio = models.TextField(max_length=300, blank=True)
     birthdate = models.DateField(null=True, blank=True)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='def.png', upload_to='profile_pics')
 
 
     def __str__(self):
@@ -29,10 +29,14 @@ class Profile(models.Model):
 
         img = Image.open(self.image.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size = (300,300)
+        if img.height > 200 or img.width > 200:
+            output_size = (200,200)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+            draw = ImageDraw.Draw(img)
+            draw.ellipse((180, 200, 180, 200), fill=(255,0,0,0))
 
 
     # def getid(self, i):

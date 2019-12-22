@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('', include('votingsystem.urls')),
     path('', include('votingmain.urls')),
+    path('admin/backups/', include('dbbackup_ui.urls')),
     path('admin/', admin.site.urls),
 ]
 

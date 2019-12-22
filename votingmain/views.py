@@ -69,8 +69,12 @@ def results(request):
 def profile(request):
     current_user = request.user
     context = getuserinfo(current_user.id)
-
-
+    info ={
+        'count': getuservotings(context.id).count(),
+        'date': current_user.date_joined,
+        'email': current_user.email
+    }
+    print(getuservotings(context.id))
     # if request.POST.get('action') == 'post':
     #     title = request.POST.get('title')
     #     description = request.POST.get('description')
@@ -85,7 +89,7 @@ def profile(request):
     #     return JsonResponse(response_data)
 
 
-    return render(request, 'profile.html', {'context': context})
+    return render(request, 'profile.html', {'context': context,'info':info})
 
 
 class ProfileView(LoginRequiredMixin, ListView):
@@ -172,7 +176,7 @@ def votedetails(request, pk):
     if request.method == 'POST':
         opt = request.POST.get('optradio')
         if opt is not None:
-            option_id = getoptionid(pk, optradio)
+            option_id = getoptionid(pk, opt)
             Result.objects.create(resultprofile_id=profile, resultvoting_id=option_id)
 
         else:
@@ -211,17 +215,21 @@ def createoptions(request):
     args = {}
     args.update(csrf(request))
     #form = OptionsCreateForm(instance=request.user)
+    voting_id = request.session['vote_id']
+    voting = getvoting(voting_id)
+    print(voting_id)
 
     if request.method == 'POST':
         options = request.POST.get('min-2')
         option = options.split(',')
         for i in option:
-            request.session['title'] = i
-            VotingOptions.objects.create(title=i, voting_id=request.session['vote_id'])
+            if i!="":
+                request.session['title'] = i
+                VotingOptions.objects.create(title=i, voting_id=request.session['vote_id'])
 
         return redirect('home')
 
-    return render(request, 'votings/votingoptions.html')
+    return render(request, 'votings/votingoptions.html', {'voting':voting})
 
 
 
