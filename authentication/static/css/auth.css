@@ -1,0 +1,63 @@
+#menu{
+  height: 8vh;
+  color: #EE7155;
+  /* padding-top: 10vh; */
+  background-color: white;
+  position:static;
+}
+
+.na{
+  background-color: white;
+  z-index: 999;
+}
+
+a{
+  color: #EE7155;
+  font-weight: 700;
+}
+
+.nav-button-lan{
+  margin-top: 1.5vh;
+  margin-right: 1.5vh;
+  border-color: white;
+}
+
+body{
+  background-color: #E5F1F6;
+}
+
+#login{
+  padding: 30px;
+  margin-top: 7vh;
+  background-color:  white;
+  border-radius: 10px;
+
+}
+
+h1{
+  color: #208CB7;
+  padding-bottom: 5vh;
+}
+
+label{
+  color: darkgrey;
+  color: #7DC9E7;
+}
+
+.log-button{
+  padding-top: 5vh;
+}
+
+.log-button-1{
+  width: 22vw;
+  background-color: #208CB7;
+}
+
+.cantlog{
+  margin-top: 5vh;
+  color: blue;
+}
+
+.cantcol{
+  color:#7DC9E7;
+}

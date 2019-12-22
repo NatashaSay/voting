@@ -1,57 +1,52 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{%block login%}
-<h1 class="text-center">Log in</h1>
-    <form class="form-horizontal text-center" method="post" action="{% url 'login' %}">
-      {%csrf_token%}
-  <fieldset  class="text-left">
-    <div class="form-group">
-      <label for="inputEmail" class="control-label col-xs-1">Email</label>
-      <div class="col-xs-12">
-        <input type="Email" name="inputEmail" class="form-control" id="inputEmail" placeholder="Email">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="control-label col-xs-1">Password</label>
-      <div class="col-xs-12">
-      <input type="password" name="inputPassword" class="form-control" id="inputPassword" placeholder="Пароль">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="">
-        <div class="checkbox col-xs-1">
-          <label><input type="checkbox"> Запомнить</label>
+{% block content %}
+
+<section id="login">
+  <h1 class="text-center">Log in</h1>
+      <form class="form-horizontal text-center" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <fieldset  class="text-left">
+
+          <div class="form-group">
+            <label for="inputEmail" class="control-label col-xs-1">Email</label>
+            <div class="col-xs-12">
+              <input type="Email" name="inputEmail" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword" class="control-label col-xs-1">Password</label>
+            <div class="col-xs-12">
+              <input type="password" name="inputPassword" class="form-control" id="inputPassword" placeholder="Пароль">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="">
+              <div class="checkbox col-xs-1">
+                <label><input type="checkbox"> Запомнить</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="text-center log-button">
+              <button type="submit" class="btn btn-primary log-button-1">log in</button>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <div class="cantlog">
+              <p><a class="cantcol" href="password-reset/">Can't log in?</a>  •  <a class="cantcol" href="/signup">Sign up for an account </a></p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary">Войти</button>
-      </div>
-    </div>
-  </fieldset>
-<div class="row">
-  <div class="col-xs-12 text-center">
-    <div class="">
-      <p><a href="password-reset/">Can't log in?</a>  •  <a href="/signup">Sign up for an account </a></p>
-    </div>
-  </div>
-</div>
-</form>
-{%endblock%}
-{% block login1 %}
-<div class="card">
-<div class="card-body">
-<h4 class="card-title"></h4>
 
-<form method="post">
-{% csrf_token %}
-<input type="hidden" name="next" value="{{ next }}">
-<input type="text" name="" value="">
-{{ form|crispy }}
+      </form>
+</section>
 
-<button type="submit" class="btn btn-primary btn-block">Log in</button>
-</form>
-</div>
-</div>
 {% endblock %}
