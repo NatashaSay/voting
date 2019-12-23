@@ -77,6 +77,7 @@ class Voting(models.Model):
     finger = models.BooleanField(default=False)
 
     pa = models.CharField(max_length=200, blank=True)
+    
 
     MODE = (
     ('o', 'One choice'),

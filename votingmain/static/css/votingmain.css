@@ -304,3 +304,28 @@ h3{
 .return{
   padding-top: 10vh;
 }
+
+
+/* colors
+#E5F1F6; - светлый синий
+#EE7155; - красный
+#208CB7; - темно синий
+*/
+
+.myblock{
+  margin-top: 8vh;
+}
+
+.delete{
+  margin-top: 12vh;
+  margin-left: 10vw;
+}
+
+
+.info-stat{
+  width: 20vw;
+  background-color: #E5F1F6;
+  color: #208CB7;
+  border-radius: 10px;
+  padding: 5px;
+}

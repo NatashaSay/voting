@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'dbbackup_ui',
-    
+
     'votingsystem',
 
     'blockchain',
@@ -99,7 +99,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'dwerty88',
         'HOST': '127.0.0.1',
-        'PORT': '5432',
+        #'PORT': '5432',
     }
 }
 

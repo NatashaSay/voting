@@ -11,6 +11,11 @@ def getallvotings(date_sort=False, date_sort_reversed=False):
 
 def getuservotings(user_id):
     voting = Voting.objects.filter(userprofile_id=user_id)
+    for item in voting:
+        options = getoptions(item)
+        if options.count() == 0:
+            item.delete()
+
     return voting
 
 
@@ -48,6 +53,12 @@ def getrelevantvotings(date_sort=False, date_sort_reversed=False):
         if now > item.finished:
             item.is_available=False
             item.save()
+
+        options = getoptions(item)
+
+        if options.count() == 0:
+            item.delete()
+
 
     return votings.exclude(is_available=False)
 
@@ -109,6 +120,28 @@ def gettitleoptions(option_id):
     return option.title
 
 
+def getcounter():
+    voting = getrelevantvotings()
+    list = []
+    counter = 0
+    for item in voting:
+        options = getoptions(item)
+        for j in options:
+            counter+=getresultbyoption(j.id)
+
+        list.append(counter)
+        counter=0
+
+    return list
+
+def getcounterbyid(voting_id):
+    voting = getvoting(voting_id)
+    options = getoptions(voting_id)
+    counter = 0
+    for i in options:
+        counter+=getresultbyoption(i.id)
+
+    return counter
 # def getages(voting_id):
 #     options=getresult(voting_id)
 #     results = []

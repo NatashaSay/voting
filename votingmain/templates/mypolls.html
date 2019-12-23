@@ -1,27 +1,40 @@
 {% extends 'basemain.html' %}
 {% block content %}
 
+<section id="search">
+  <div class="container">
+    {% for item in voting %}
+    <div class="">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="thumbnail">
+          <!--<img src="..." alt="...">-->
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-8">
+                <h3><a href="{% url 'vote-detail' pk=item.pk %}">{{ item.title }}</a></h3>
+                <p>{{ item.info }}</p>
+                <p>theme - {{item.theme}}</p>
+                <p>created - {{ item.created }}</p>
+                <p>finished - {{ item.finished }}</p>
+                <p><a href="{% url 'vote-detail' pk=item.pk %}" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Statistics</a></p>
+              </div>
+              <div class="col-md-4">
+                <div class="myblock">
+                  <p>votings - {{item.theme}}</p>
+                  <p>blockchain - {{item.theme}}</p>
+                  <button type="button" name="button" class="btn btn-danger delete">Delete</button>
+                </div>
+              </div>
+            </div>
 
-<div class="container">
-  {% for item in voting %}
-  <div class="">
-    <div class="col-sm-4 col-md-4">
-      <div class="thumbnail">
-        <!--<img src="..." alt="...">-->
-        <div class="caption">
-          <h3><a href="{% url 'vote-detail' pk=item.pk %}">{{ item.title }}</a></h3>
-          <p> User {{ item.userprofile_id }}</p>
-          <p>{{ item.info }}</p>
-          <p>theme - {{item.theme}}</p>
-          <p>created - {{ item.created }}</p>
-          <p>finished - {{ item.finished }}</p>
-          <p><a href="#" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Statistics</a></p>
+            </div>
         </div>
       </div>
     </div>
+      {% endfor %}
   </div>
-    {% endfor %}
-</div>
+</section>
+
 
 
 {% endblock %}

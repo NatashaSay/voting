@@ -24,10 +24,12 @@ from django.views.generic import (
 
 @login_required
 def home(request):
+    count = getcounter()
     context = {
-        'voting': getrelevantvotings()
+        'voting': getrelevantvotings(),
+        'count': count
     }
-    print(getrelevantvotings())
+
     return render(request, 'home.html', context)
 
 
@@ -132,8 +134,6 @@ def votingdetails(request, pk):
     voting = getvoting(pk)
     voting = get_object_or_404(Voting, pk=pk)
 
-    return render(request, 'votings/votingdetails.html', {'context':voting})
-
 
 class VotingDetailView(LoginRequiredMixin, DetailView):
     template_name = 'votings/votingdetails.html'
@@ -146,7 +146,10 @@ class VotingDetailView(LoginRequiredMixin, DetailView):
 
 
 @login_required
-def votedetails(request, pk):
+def votedetails(request, pk=0):
+    # if(pk==0):
+    #     return redirect('home')
+
     request.session['vote_id']=pk
     voting = getvoting(pk)
     username = getprofile(voting.userprofile_id)
@@ -237,6 +240,17 @@ def createoptions(request):
 def viewstatistics(request, pk):
     voting = getvoting(pk)
     username = getprofile(voting.userprofile_id)
+    options = getoptions(pk)
+    result = getcounterbyid(pk)
+    # print('-------')
+    # print(result)
+    # print('-------')
+    # arg = {}
+    # for i in result:
+    #
+    #     print(i)
+    #     # arg.update({i.option:i.count})
+    # print(arg)
     context = {
         'username': username.firstname,
         'title': voting.title,
@@ -244,11 +258,12 @@ def viewstatistics(request, pk):
         'theme': voting.theme,
         'created': voting.created,
         'finished': voting.finished,
+        'result': result
     }
     dataset = createset(pk)
     #datasetage = createsetbyage(pk)
 
-    return render(request, 'votings/statistic.html', {'dataset': dataset})
+    return render(request, 'votings/statistic.html', {'dataset': dataset, 'context':context})
 
 
 
