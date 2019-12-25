@@ -1,0 +1,28 @@
+{
+    "profile": 4,
+    "voting": 146,
+    "time": "2019-12-23 20:09:30.393452+00:00",
+    "option": 125,
+    "hash": 0
+}
+{
+    "profile": 4,
+    "voting": 172,
+    "time": "2019-12-23 22:16:28.035856+00:00",
+    "option": 182,
+    "hash": "a974a24e669bcbb97c162da8d8ac3f7eb5f770846cbe42da4e1495ba7eb85f84"
+}
+{
+    "profile": 6,
+    "voting": 174,
+    "time": "2019-12-23 22:18:50.533155+00:00",
+    "option": 183,
+    "hash": "46f44d5f4edcaf2dcfbe58e333ec8af024a0f42ca8b1dca10ec99211888649ee"
+}
+{
+    "profile": 6,
+    "voting": 175,
+    "time": "2019-12-24 09:00:28.393689+00:00",
+    "option": 186,
+    "hash": "74ee1bb7ea6ebfc2c67cbdcb86478630b53ee05c1de62af92b8ef53b708219c7"
+}

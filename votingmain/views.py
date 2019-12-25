@@ -9,6 +9,7 @@ from votedata.models import Voting, VotingOptions, Profile, User, Result
 from django.contrib.auth.mixins import LoginRequiredMixin
 from votingsystem.dbqueries import *
 from votingmain.statistic import *
+from blockchain.block import *
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .forms import ProfileForm, UserUpdateForm, ProfileUpdateForm, VotingCreateForm, OptionsCreateForm
@@ -24,6 +25,8 @@ from django.views.generic import (
 
 @login_required
 def home(request):
+
+
     count = getcounter()
     context = {
         'voting': getrelevantvotings(),
@@ -66,6 +69,16 @@ def results(request):
 #         #return Voting.objects.all()
 #         return context
 
+class SearchResultsView(ListView):
+    model = Voting
+    template_name = 'search_results.html'
+
+    def get_queryset(self): # новый
+        query = self.request.GET.get('q')
+        object_list = Voting.objects.filter(
+            Q(title__icontains=query) | Q(created__icontains=query)
+        )
+        return object_list
 
 @login_required
 def profile(request):
@@ -144,11 +157,10 @@ class VotingDetailView(LoginRequiredMixin, DetailView):
         print(voting)
 
 
+blockchain = Blockchain()
 
 @login_required
 def votedetails(request, pk=0):
-    # if(pk==0):
-    #     return redirect('home')
 
     request.session['vote_id']=pk
     voting = getvoting(pk)
@@ -177,10 +189,36 @@ def votedetails(request, pk=0):
         'view': view
     }
     if request.method == 'POST':
+
+
         opt = request.POST.get('optradio')
         if opt is not None:
             option_id = getoptionid(pk, opt)
+
             Result.objects.create(resultprofile_id=profile, resultvoting_id=option_id)
+
+            # BLOCKCHAIN
+            profile = getidprofile(request.user.id)
+            voting = getvoting(pk)
+            time = getresult1(profile, option_id)
+            option_id = getoptionid(pk, opt)
+            print('BLOCKCHAIN')
+
+            hashvalue=0
+            # blockchain = Blockchain()
+            #if getcounterbyid(voting.id)!=1:
+            # prev_block = blockchain.chain
+            # print(prev_block, 'PREV')
+            # hashvalue = blockchain.hashoverride(prev_block)
+            # print(hashvalue, 'hashvalue')
+            str = blockchain.get_last_block()
+            hashvalue = blockchain.hashoverride(str)
+            block = blockchain.create_block(profile, voting.id, time, option_id, hashvalue)
+            print(block, 'current')
+            print(blockchain.chain, 'chain')
+
+            # BLOCKCHAIN
+
 
         else:
             optcheck = request.POST.getlist('optcheck')

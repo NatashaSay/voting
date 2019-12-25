@@ -142,6 +142,25 @@ def getcounterbyid(voting_id):
         counter+=getresultbyoption(i.id)
 
     return counter
+
+
+
+
+
+
+def getresultblock(voting_id):
+    getcounterbyid(voting_id)
+
+
+def getresult1(profile, option_id):
+    result = Result.objects.get(resultprofile_id=profile, resultvoting_id=option_id)
+    return result.created
+
+
+
+
+
+
 # def getages(voting_id):
 #     options=getresult(voting_id)
 #     results = []

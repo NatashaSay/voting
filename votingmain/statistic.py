@@ -27,7 +27,7 @@ def createsetbyage(voting_id):
     options = getoptions(voting_id)
     result = getresult(voting_id)
     age = getages(voting_id)
-    print(age) 
+    print(age)
 
     dataset = []
     for i in result:
