@@ -1,26 +1,30 @@
 {% extends 'basemain.html' %}
 {% block content %}
-<p>results</p>
 
-<div class="container">
-  {% for item in voting %}
-  <div class="">
-    <div class="col-sm-4 col-md-4">
-      <div class="thumbnail">
-        <!--<img src="..." alt="...">-->
-        <div class="caption">
-          <h3><a href="{% url 'vote-detail' pk=item.pk %}">{{ item.title }}</a></h3>
-          <p> User {{ item.userprofile_id }}</p>
-          <p>{{ item.info }}</p>
-          <p>theme - {{item.theme}}</p>
-          <p>created - {{ item.created }}</p>
-          <p>finished - {{ item.finished }}</p>
-          <p><a href="#" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Statistics</a></p>
+<section id="result">
+  <h1 class="search-text-2">Results</h1>
+
+  <div class="container">
+    {% for item in voting %}
+    <div class="">
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <!--<img src="..." alt="...">-->
+          <div class="caption">
+            <h3><a href="{% url 'vote-detail' pk=item.pk %}">{{ item.title }}</a></h3>
+            <p> User {{ item.userprofile_id }}</p>
+            <p>{{ item.info }}</p>
+            <p>theme - {{item.theme}}</p>
+            <p>created - {{ item.created }}</p>
+            <p>finished - {{ item.finished }}</p>
+            <p><a href="#" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-default" role="button">Statistics</a></p>
+          </div>
         </div>
       </div>
     </div>
+      {% endfor %}
   </div>
-    {% endfor %}
-</div>
+</section>
+
 
 {% endblock %}

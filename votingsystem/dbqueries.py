@@ -144,7 +144,8 @@ def getcounterbyid(voting_id):
     return counter
 
 
-
+def deletevoting(voting_id):
+    Voting.objects.filter(id=voting_id).delete()
 
 
 

@@ -36,12 +36,13 @@
 }
 
 #search{
-  padding-top: 13vh;
+  padding-top: 11vh;
   overflow-x: hidden;
+  min-height: 28vh;
 }
 
 #votings{
-  padding-top: 8vh;
+  padding-top: 0vh;
   background-color: #FFFFFF;
 }
 
@@ -328,4 +329,52 @@ h3{
   color: #208CB7;
   border-radius: 10px;
   padding: 5px;
+}
+
+.footer{
+  margin-top: 15vh;
+  height: 7vh;
+  background-color: #208CB7;
+  color: white;
+  font-size: 12pt;
+}
+
+.footer-text{
+  padding-top: 2vh;
+}
+
+.search-text{
+  color: #208CB7;
+  margin-bottom: 5vh;
+  margin-left: 42vw;
+  margin-top: 8vh;
+}
+
+.search-text-2{
+  color: #208CB7;
+  margin-bottom: 5vh;
+  margin-left: 45vw;
+  margin-top: 8vh;
+}
+
+#content{
+  min-height: 75vh;
+}
+
+#result{
+  margin-top: 10vh;
+}
+
+.thumb-result{
+  height: 60vh;
+}
+
+.btn-det{
+  background-color: #208CB7;
+  margin-bottom: 1.5vh;
+  margin-top: 1.5vh;
+}
+
+.btn-det:hover{
+  background-color: lightblue;
 }

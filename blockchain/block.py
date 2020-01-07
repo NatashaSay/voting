@@ -20,8 +20,9 @@ class Blockchain:
         with open('blockchain/txt/text.txt', 'r') as f:
             data_new = str(f.read())
             data_new=data_new.split('}{')
-            print(data_new[-1], 'datanew')
-            return data_new
+            data_new = data_new[-1]
+            print(data_new[:-1])
+            return data_new[:-1]
 
 
     def create_block(self, profile, voting, time, option, prev_hash=0):
@@ -88,12 +89,27 @@ class Blockchain:
      #    previous_block = self.get_last_block()
      #    return previous_block['index'] + 1
 
+    def check(self):
+        with open('blockchain/txt/text.txt', 'r') as f:
+            data_new = str(f.read())
+            data_new=data_new.split('}{')
+            for i in data_new:
+                 # data_new = data_new[-1]
+                 print('-----START-----')
+                 print(i)
+
+                 print('-----HASH-----')
+                 i_hash = self.hashoverride(i)
+                 print(i_hash)
+                 print('-----FINISH-----')
+             # data_new = data_new[-1]
+             # print(data_new[:-1])
+            return None
 
 
 
-
-def check():
-    return None
+# def check():
+#     return None
 
 
 def createblock(profile, voting, time, option, prev_hash=''):

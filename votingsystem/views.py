@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 def index(request):
+    # if(request.method=='GET'):
+    #     print('hello')
     return render(request, 'index.html')
 
 

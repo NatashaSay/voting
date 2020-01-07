@@ -1,5 +1,6 @@
 body{
   background-color: #E5F1F6;
+  overflow-x: hidden;
 }
 
 .navbar{
@@ -192,4 +193,11 @@ section#contacts.p{
   font-size:25px;
   background-color: #208CB7;
   border-radius: 50%;
+}
+
+.select{
+  margin-top: 2.5vh;
+  width: 11vw;
+  border: none;
+  font-weight: 500;
 }

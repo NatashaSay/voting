@@ -22,7 +22,9 @@
                 <div class="myblock">
                   <!-- <p>votings - {{item.theme}}</p>
                   <p>blockchain - {{item.theme}}</p> -->
-                  <button type="button" name="button" class="btn btn-danger delete">Delete</button>
+                  <a href="{% url 'delete' pk=item.pk %}"><button type="button" name="button" class="btn btn-danger delete" <!--data-toggle="modal" data-target="#myModal"-->>Delete</button></a>
+
+
                 </div>
               </div>
             </div>
@@ -33,6 +35,26 @@
     </div>
       {% endfor %}
   </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        <p>This action is irreversible. Remote voting cannot be restored...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Return</button>
+        <button type="button" class="btn btn-success">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
 

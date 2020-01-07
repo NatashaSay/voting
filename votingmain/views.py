@@ -26,6 +26,7 @@ from django.views.generic import (
 @login_required
 def home(request):
 
+    # blockchain.check()
 
     count = getcounter()
     context = {
@@ -73,7 +74,7 @@ class SearchResultsView(ListView):
     model = Voting
     template_name = 'search_results.html'
 
-    def get_queryset(self): # новый
+    def get_queryset(self):
         query = self.request.GET.get('q')
         object_list = Voting.objects.filter(
             Q(title__icontains=query) | Q(created__icontains=query)
@@ -89,7 +90,7 @@ def profile(request):
         'date': current_user.date_joined,
         'email': current_user.email
     }
-    print(getuservotings(context.id))
+    # print(getuservotings(context.id))
     # if request.POST.get('action') == 'post':
     #     title = request.POST.get('title')
     #     description = request.POST.get('description')
@@ -154,7 +155,7 @@ class VotingDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(request):
         voting = request.session['vote_id']
-        print(voting)
+        # print(voting)
 
 
 blockchain = Blockchain()
@@ -202,7 +203,7 @@ def votedetails(request, pk=0):
             voting = getvoting(pk)
             time = getresult1(profile, option_id)
             option_id = getoptionid(pk, opt)
-            print('BLOCKCHAIN')
+
 
             hashvalue=0
             # blockchain = Blockchain()
@@ -214,8 +215,8 @@ def votedetails(request, pk=0):
             str = blockchain.get_last_block()
             hashvalue = blockchain.hashoverride(str)
             block = blockchain.create_block(profile, voting.id, time, option_id, hashvalue)
-            print(block, 'current')
-            print(blockchain.chain, 'chain')
+            # print(block, 'current')
+            # print(blockchain.chain, 'chain')
 
             # BLOCKCHAIN
 
@@ -258,7 +259,7 @@ def createoptions(request):
     #form = OptionsCreateForm(instance=request.user)
     voting_id = request.session['vote_id']
     voting = getvoting(voting_id)
-    print(voting_id)
+    # print(voting_id)
 
     if request.method == 'POST':
         options = request.POST.get('min-2')
@@ -303,6 +304,11 @@ def viewstatistics(request, pk):
 
     return render(request, 'votings/statistic.html', {'dataset': dataset, 'context':context})
 
+
+
+def delete(request, pk):
+    deletevoting(pk)
+    return redirect('mypolls')
 
 
 # @login_required

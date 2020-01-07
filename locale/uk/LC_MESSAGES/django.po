@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-07 21:30+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: .\votingsystem\templates\index.html:50
+msgid "Home"
+msgstr "Домівка"
+
+#: .\votingsystem\templates\index.html:51
+#: .\votingsystem\templates\index.html:139
+msgid "About"
+msgstr "Про нас"
+
+#: .\votingsystem\templates\index.html:52
+msgid "Blockchain"
+msgstr "Блокчейн"
+
+#: .\votingsystem\templates\index.html:53
+#: .\votingsystem\templates\index.html:193
+msgid "Contacts"
+msgstr "Контакти"
+
+#: .\votingsystem\templates\index.html:54
+#: .\votingsystem\templates\index.html:108
+msgid "Log in"
+msgstr "Увійти"
+
+#: .\votingsystem\templates\index.html:102
+msgid "Blockchain-based voting system"
+msgstr "Блокчейн-оріентована система голосувань"
+
+#: .\votingsystem\templates\index.html:105
+msgid ""
+"We present a completely new service that is based on decentralized "
+"blockchain technology. Now the voting system can be implemented in state and "
+"business enterprises, because it is safe and transparent. Wide settings for "
+"any type of voting and statistically generated result."
+msgstr ""
+"Ми презентуємо насправді новий сервіс, що базується на використанні"
+"технології блокчейн. Наразі система може використовуватися для персональних"
+"цілей та у бізнесі, позаяк вона є безпечною та прозорою. Широкі налаштування"
+"для будь-якого типу голосування та статистичні результати"
+
+
+#: .\votingsystem\templates\index.html:143
+msgid "Idea"
+msgstr "Ідея"
+
+#: .\votingsystem\templates\index.html:144
+msgid ""
+"Now the voting system can be implemented in state and business enterprises, "
+"because it is safe and transparent."
+msgstr ""
+"Наразі систему можна вбудувати у будь-які комерційні бізнес-процеси, "
+"тому що вона є безпечною та прозорою."
+
+#: .\votingsystem\templates\index.html:147
+msgid "Task"
+msgstr "Задача"
+
+#: .\votingsystem\templates\index.html:148
+msgid ""
+"We present a completely new service that is based on decentralized "
+"blockchain technology."
+msgstr ""
+"Ми презентуємо насправді новий сервіс, що базується на використанні"
+"технології блокчейн."
+
+#: .\votingsystem\templates\index.html:159
+msgid "How it works?"
+msgstr "Як це працює?"
+
+#: .\votingsystem\templates\index.html:164
+msgid "Secure"
+msgstr "Безпечно"
+
+#: .\votingsystem\templates\index.html:167
+#, fuzzy
+#| msgid "Blockchain"
+msgid "Blockchain-based"
+msgstr "Блокчейн-орінтовано"
+
+#: .\votingsystem\templates\index.html:175
+msgid "Transparently"
+msgstr "Прозоро"
+
+#: .\votingsystem\templates\index.html:178
+msgid "Сonveniently"
+msgstr "Зручно"
+
+#: .\votingsystem\templates\index.html:217
+msgid "@2019 Blockchain-based voting system"
+msgstr "@2019 Blockchain-орієнтована система голосувань"

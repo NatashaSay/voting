@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,13 +47,13 @@
 
             <!-- Links -->
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="#menu">Home<span class="sr-only">(current)</span></a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#how">Blockchain</a></li>
-              <li><a href="#contacts">Contacts</a></li>
-              <li><button type="button" class="btn btn-default nav-button" name="button"><a href="login/">Log in</a></button></li>
+              <li class="active"><a href="#menu">{% trans "Home" %}<span class="sr-only">(current)</span></a></li>
+              <li><a href="#about">{% trans "About" %}</a></li>
+              <li><a href="#how">{% trans "Blockchain" %}</a></li>
+              <li><a href="#contacts">{% trans "Contacts" %}</a></li>
+              <li><button type="button" class="btn btn-default nav-button" name="button"><a href="login/">{% trans "Log in" %}</a></button></li>
 
-              <li class="nav-button-lan">
+              <!-- <li class="nav-button-lan">
                 <div class="dropdown">
                   <button class="btn btn-default btn-default-border dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     en
@@ -64,26 +65,47 @@
                     </ul>
 
                 </div>
+              </li> -->
+
+              <li>
+                <form action="{% url 'set_language' %}" method="post" >
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                    <select name="language" class="col-md-2 select" onchange="this.form.submit()">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <!-- <input type="submit" value="choose" class="col-md-1 click-btn btn btn-default"> -->
+                </form>
               </li>
             </ul>
             <!-- Text -->
           </div>
         </div>
       </nav>
+
     </section>
+
+
 
     <section id="main">
       <div class="container">
         <div class="row text-left">
           <div class="col-md-5 col-md-offset-1 main-text">
             <div class="pad">
-              <p>Blockchain-based voting system</p>
+              <p>{% trans "Blockchain-based voting system" %}</p>
             </div><hr>
             <p class="sub-text">
-               We present a completely new service that is based on decentralized blockchain technology. Now the voting system can be implemented in state and business enterprises, because it is safe and transparent. Wide settings for any type of voting and statistically generated result.
+               {% trans "We present a completely new service that is based on decentralized blockchain technology. Now the voting system can be implemented in state and business enterprises, because it is safe and transparent. Wide settings for any type of voting and statistically generated result." %}
             </p>
                 <!-- <button type="button" class="btn btn-prinary" name="button"><a href="signup/">Sign up</a></button> -->
-                <button type="button" class="btn btn-default login-btn" name="button"><a href="login/">Log in</a></button>
+                <button type="button" class="btn btn-default login-btn" name="button"><a href="login/">{% trans "Log in" %}</a></button>
 
           </div>
           <div class="col-md-5 col-md-offset-1 pull-right wow zoomIn" data-wow-duration="0.5s" data-wow-delay="0.5s" data-wow-offset="0" data-wow-iteration="1">
@@ -91,22 +113,39 @@
         </div>
         </div>
       </div>
+      <!-- <div class="container">
+          <form action="{% url 'set_language' %}" method="post" class="d-flex justify-content-center">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}">
+              <select name="language" class="col-md-8 mr-1">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for language in languages %}
+                      <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                          {{ language.name_local }} ({{ language.code }})
+                      </option>
+                  {% endfor %}
+              </select>
+              <input type="submit" value="choose" class="form-control col-md-4 click-btn btn btn-warning">
+          </form>
+      </div> -->
     </section>
 
     <section id="about">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
-            <p class="about-main">About</p>
+            <p class="about-main">{% trans "About" %}</p>
           </div>
           <div class="row">
             <div class="col-md-4 col-md-offset-1 text-center">
-              <p class="about-sub-main">Idea</p>
-              <p class="about-text">Now the voting system can be implemented in state and business enterprises, because it is safe and transparent.</p>
+              <p class="about-sub-main">{% trans "Idea" %}</p>
+              <p class="about-text">{% trans "Now the voting system can be implemented in state and business enterprises, because it is safe and transparent." %}</p>
             </div>
             <div class="col-md-4 col-md-offset-2 text-center">
-              <p class="about-sub-main">Task</p>
-              <p class="about-text">We present a completely new service that is based on decentralized blockchain technology.</p>
+              <p class="about-sub-main">{% trans "Task" %}</p>
+              <p class="about-text">{% trans "We present a completely new service that is based on decentralized blockchain technology." %}</p>
             </div>
           </div>
         </div>
@@ -117,15 +156,15 @@
       <div class="container">
         <div class="row">
           <div class="col-md-11 col-md-offset-1">
-            <p class="how-main-text">How it works?</p>
+            <p class="how-main-text">{% trans "How it works?" %}</p>
           </div>
           <div class="row">
             <div class="col-md-3 wow bounceInLeft" data-wow-duration="1s" data-wow-delay="1s" data-wow-offset="0" data-wow-iteration="1">
               <p class="how-item"><div class="number">1</div>
-                <p class="how-item">Secure</p>
+                <p class="how-item">{% trans "Secure" %}</p>
               </p>
               <p class="how-item"><div class="number">2</div>
-                <p class="how-item">Blockchain-based</p>
+                <p class="how-item">{% trans "Blockchain-based" %}</p>
               </p>
             </div>
             <div class="col-md-6 text-center how-img">
@@ -133,10 +172,10 @@
             </div>
             <div class="col-md-3 how-col wow bounceInRight" data-wow-duration="1s" data-wow-delay="2s" data-wow-offset="1" data-wow-iteration="1">
               <p class="how-item"><div class="number">3</div>
-                <p class="how-item">Transparently</p>
+                <p class="how-item">{% trans "Transparently" %}</p>
               </p>
               <p class="how-item"><div class="number">4</div>
-                <p class="how-item">Сonveniently</p>
+                <p class="how-item">{% trans "Сonveniently" %}</p>
               </p>
             </div>
           </div>
@@ -151,7 +190,7 @@
             <img src="{% static 'img/cherry-done.png' %}?version=1" alt="" class="img-responsive footer-img">
           </div>
           <div class="col-md-6 text-center">
-            <p class="how-main-text">Contacts</p>
+            <p class="how-main-text">{% trans "Contacts" %}</p>
             <div class="contacts-item text-left">
               <img src="{% static 'img/email.png' %}?version=1" alt="" class="img-responsive how-image contacts-item">
                 <p class="how-item-contact">&nbsp;&nbsp;<a href="#" class="contacts-a">nataliia.saichyshyna@nure.ua</a></p>
@@ -175,7 +214,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
-            <p class="footer">@2019 Blockchain-based voting system</p>
+            <p class="footer">{% trans "@2019 Blockchain-based voting system" %}</p>
           </div>
         </div>
       </div>
@@ -185,5 +224,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+//     const fetch = require('node-fetch');
+// global.Headers = fetch.Headers;
+//     header("Access-Control-Allow-Origin: http://localhost:8001");
+//     header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+//     header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    </script>
   </body>
 </html>
