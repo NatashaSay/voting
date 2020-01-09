@@ -7,6 +7,8 @@ from .views import (
 from . import views
 
 urlpatterns = [
+    path('', views.index, name = 'index'),
+
     path('home/', views.home, name = 'home'),
     path('profile/', views.profile, name = 'profile'),
     path('editprofile/', views.editprofile, name = 'editprofile'),
@@ -26,4 +28,5 @@ urlpatterns = [
 
     path('statistic/<int:pk>/', views.viewstatistics, name='viewstatistics'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
+    path('order/', views.orderresult, name='title'),
 ]

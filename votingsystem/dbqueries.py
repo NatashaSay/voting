@@ -48,7 +48,25 @@ def getidprofile(user_id):
 
 def getrelevantvotings(date_sort=False, date_sort_reversed=False):
     now = timezone.now()
-    votings = Voting.objects.all()
+    votings = Voting.objects.all().order_by('-created')
+
+    for item in votings:
+        if now > item.finished:
+            item.is_available=False
+            item.save()
+
+        options = getoptions(item)
+
+        if options.count() == 0:
+            item.delete()
+
+
+    return votings.exclude(is_available=False)
+
+def getorderobjects(date_sort=False, date_sort_reversed=False):
+    now = timezone.now()
+    votings = Voting.objects.all().order_by('title')
+
     for item in votings:
         if now > item.finished:
             item.is_available=False

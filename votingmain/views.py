@@ -23,6 +23,11 @@ from django.views.generic import (
 )
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
+
 @login_required
 def home(request):
 
@@ -80,6 +85,25 @@ class SearchResultsView(ListView):
             Q(title__icontains=query) | Q(created__icontains=query)
         )
         return object_list
+
+
+# class OrderResultsView(ListView):
+#     model = Voting
+#     template_name = 'search_results.html'
+#
+#     def get_queryset(self):
+#         object_list = getorderobjects()
+#         return object_list
+
+@login_required
+def orderresult(request):
+    count = getcounter()
+    context = {
+        'voting': getorderobjects(),
+        'count': count
+    }
+
+    return render(request, 'home.html', context)
 
 @login_required
 def profile(request):
