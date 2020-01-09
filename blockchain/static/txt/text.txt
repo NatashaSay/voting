@@ -62,3 +62,34 @@
     "option": 211,
     "hash": "f3e1b841f532cc96a51492788cfdded8c2d4bae2f6bbc50f91399dd6738ff139"
 }
+{
+    "profile": 6,
+    "voting": 190,
+    "time": "2020-01-09 15:48:01.760251+00:00",
+    "option": 222,
+    "hash": "33586b2ae7c93b5fd1db067e32a1f657875b017d05ea92d9e6dca57151d6c87c"
+}{
+    "profile": 6,
+    "voting": 192,
+    "time": "2020-01-09 16:19:29.469331+00:00",
+    "option": 227,
+    "hash": "523ce3550f66954233d7082c31cb58221c7dc14e7f6a8e7f5a4ec83b3b58b339"
+}{
+    "profile": 4,
+    "voting": 197,
+    "time": "2020-01-09 16:36:43.698899+00:00",
+    "option": null,
+    "hash": "5ecbd74897af591484ca5cb5fffb36d54882be8fc5435f34bbd2861317248259"
+}{
+    "profile": 4,
+    "voting": 200,
+    "time": "2020-01-09 16:50:21.923997+00:00",
+    "option": 249,
+    "hash": "18fc4342a89d908a30a39bd73188dc786f43b1dafcbc8bb9e7e7fe211a1cfd89"
+}{
+    "profile": 4,
+    "voting": 200,
+    "time": "2020-01-09 16:50:21.939986+00:00",
+    "option": 250,
+    "hash": "001a257a701e3e9b2e5ce36cfff40f5fe2cdad1e8b09411ce49dfe7e0b229d5e"
+}

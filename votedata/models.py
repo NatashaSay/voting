@@ -76,22 +76,22 @@ class Voting(models.Model):
     is_anon = models.BooleanField(default=False)
     finger = models.BooleanField(default=False)
 
-    pa = models.CharField(max_length=200, blank=True)
-    
+
+
 
     MODE = (
     ('o', 'One choice'),
     ('m', 'Multiple choice'),
     )
 
-    TYPE = (
-    ('y', 'Yes'),
-    ('n', 'No'),
-    ('u', 'Unknown'),
-    )
+    # TYPE = (
+    # ('y', 'Yes'),
+    # ('n', 'No'),
+    # ('u', 'Unknown'),
+    # )
 
     mode = models.CharField(max_length=50, choices=MODE, blank=False, default=0)
-    type = models.CharField(max_length=1, choices=TYPE)
+    # type = models.CharField(max_length=1, choices=TYPE)
 
     def __str__(self):
         return f"{self.title} {self.info} {self.created}"

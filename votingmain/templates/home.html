@@ -1,6 +1,6 @@
 {% extends 'basemain.html' %}
 {% block content %}
-
+{% load static %}
 <section id="home">
   <!-- <div class="container">
     <div class="row">
@@ -51,10 +51,11 @@
       </div>
     </div>
 
-    <!-- <div class="col-md-1">
-      <button class="btn btn-primary filter s-btn" type="button" data-toggle="dropdown"><i class="fa fa-filter" aria-hidden="true"></i>
-      </button>
-    </div> -->
+    <div class="col-md-1">
+      <a href="{% static 'txt\text.txt' %}" class="btn btn-info" download>B</a>
+        <!-- <button class="btn btn-primary filter s-btn" type="button" data-toggle="dropdown">B</button> -->
+
+    </div>
 
 </section>
 

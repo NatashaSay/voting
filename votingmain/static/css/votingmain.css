@@ -183,7 +183,7 @@ h3{
 .create-btn{
   position: absolute;
   left: 850px;
-  margin-top: -300px;
+  margin-top: -200px;
   color: white;
   background-color: #EE7155;
   font-weight: 600;
@@ -377,4 +377,13 @@ h3{
 
 .btn-det:hover{
   background-color: lightblue;
+}
+
+.select{
+  margin-top: 2.5vh;
+  width: 11vw;
+  border: none;
+  font-weight: 500;
+  background-color: #E5F1F6;
+  color: #208CB7;
 }

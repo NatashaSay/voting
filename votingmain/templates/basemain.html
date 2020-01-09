@@ -51,7 +51,25 @@
               <li><a href="/mypolls">My polls</a></li>
               <li><a href="/results/">Results</a></li>
               <li><a href="/profile/">My Profile</a></li>
-              <li class="nav-button-lan">
+
+              <li>
+                <form action="{% url 'set_language' %}" method="post" >
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                    <select name="language" class="col-md-2 select" onchange="this.form.submit()">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <!-- <input type="submit" value="choose" class="col-md-1 click-btn btn btn-default"> -->
+                </form>
+              </li>
+              <!-- <li class="nav-button-lan">
                 <div class="dropdown">
                   <button class="btn btn-default btn-default-border dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     en
@@ -61,8 +79,8 @@
                       <li class="lan-width"><a href="#">ua</a></li>
                     </ul>
                 </div>
-              </li>
-              <li class="nav-button-lan "><button type="button" class="btn btn-default exit" name="button"><a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></button></li>
+              </li> -->
+              <li class="nav-button-lan "><button type="button" class="btn btn-default exit" name="button"><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></button></li>
 
 
             </ul>

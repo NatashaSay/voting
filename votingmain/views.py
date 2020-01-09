@@ -248,8 +248,19 @@ def votedetails(request, pk=0):
         else:
             optcheck = request.POST.getlist('optcheck')
             for item in optcheck:
+                print(item)
                 option_id = getoptionid(pk, item)
+                print(option_id)
                 Result.objects.create(resultprofile_id=profile, resultvoting_id=option_id)
+                #
+                profile = getidprofile(request.user.id)
+                voting = getvoting(pk)
+                time = getresult1(profile, option_id)
+                # option_id = getoptionid(pk, opt)
+                #
+                str = blockchain.get_last_block()
+                hashvalue = blockchain.hashoverride(str)
+                block = blockchain.create_block(profile, voting.id, time, option_id, hashvalue)
 
         return redirect('home')
 

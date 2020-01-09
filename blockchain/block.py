@@ -17,7 +17,7 @@ class Blockchain:
 
 
     def get_last_block(self):
-        with open('blockchain/txt/text.txt', 'r') as f:
+        with open('blockchain/static/txt/text.txt', 'r') as f:
             data_new = str(f.read())
             data_new=data_new.split('}{')
             data_new = data_new[-1]
@@ -52,7 +52,7 @@ class Blockchain:
 
         #block.hash = gethash("5")
 
-        with open('blockchain/txt/text.txt', 'a') as file:
+        with open('blockchain/static/txt/text.txt', 'a') as file:
             json.dump(block, file, indent=4, ensure_ascii=False)
 
         #self.votings = {}
@@ -90,7 +90,7 @@ class Blockchain:
      #    return previous_block['index'] + 1
 
     def check(self):
-        with open('blockchain/txt/text.txt', 'r') as f:
+        with open('blockchain/static/txt/text.txt', 'r') as f:
             data_new = str(f.read())
             data_new=data_new.split('}{')
             for i in data_new:
